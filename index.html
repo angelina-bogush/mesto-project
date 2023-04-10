@@ -70,7 +70,16 @@
 
         </div>
         <div class="popup">
-             <input>
+            <div class="popup__overlay"></div>
+             <form class="form">
+                <fieldset class="form__info">
+                    <legend class="form__title">Редактировать профиль</legend>
+                    <input class="form__name" type="text" name="name" placeholder="Жак-Ив Кусто">
+                    <input class="form__description" type="text" name="description" placeholder="Исследователь Питера">
+                    <button class="form__button" type="submit">Сохранить</button>
+                </fieldset>
+                <button class="form__close-icon"></button>
+             </form>
         </div>
         <footer class="footer">
             <p class="footer__logo">© 2023 Mesto Russia</p>
