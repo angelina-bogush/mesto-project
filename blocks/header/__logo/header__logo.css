@@ -1,0 +1,21 @@
+.header__logo{
+    max-width: 142px;
+    display: block;
+    padding: 45px 0 41px 0;
+}
+.header__logo:hover{
+    opacity: 0;
+}
+@media (min-width:501px) and (max-width:960px) {
+    .header__logo{
+        padding: 28px 0 32px 21px;
+    }
+    
+}
+@media (max-width:500px) {
+    .header__logo{
+       max-width: 104px;
+       padding: 28px 0 32px 21px;
+    }
+    
+}
