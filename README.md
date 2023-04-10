@@ -16,4 +16,4 @@
  * Активация ссылок и интерактивных элементов с помощью псевдоклассов
  * Реализация переполнения блоков
 
-[Сслыка на Git Pages](https://angelina-bogush.github.io/mesto-project/)
+[Ссылка на Git Pages](https://angelina-bogush.github.io/mesto-project/)
