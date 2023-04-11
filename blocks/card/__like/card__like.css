@@ -6,6 +6,7 @@
     width: 22px;
     height: 19px;
     padding-right: 6px;
+    cursor: pointer;
 }
 .card__like:hover{
   opacity: .5;

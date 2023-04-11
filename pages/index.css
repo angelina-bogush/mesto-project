@@ -21,13 +21,12 @@
 @import url('../blocks/card/__title/card__title.css');
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
-@import url('../blocks/popup/__overlay/popup__overlay.css');
+@import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/form/form.css');
 @import url('../blocks/form/__button/form__button.css');
-@import url('../blocks/form/__description/form__description.css');
+@import url('../blocks/form/__input/form__input.css');
 @import url('../blocks/form/__close-icon/form__close-icon.css');
-@import url('../blocks/form/__info/form__info.css');
-@import url('../blocks/form/__name/form__name.css');
 @import url('../blocks/form/__title/form__title.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__logo/footer__logo.css');
+ /*{ outline: 1px solid yellow; }*/

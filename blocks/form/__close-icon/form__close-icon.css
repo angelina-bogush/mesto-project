@@ -4,10 +4,11 @@
     height: 32px;
     position: absolute;
     background-color: transparent;
-    bottom: 337px;
-    left: 438px;
+    top: -40px;
+    right: -40px;
     padding: 0;
     border: 0px;
+    background-size: cover;
 }
 
 .form__close-icon:hover {
@@ -18,8 +19,7 @@
     .form__close-icon {
         width: 20px;
         height: 20px;
-        bottom: 338px;
-        left: 260px;
-        background-size: cover;
+        right: 0;
+        top: -35px;
     }
 }

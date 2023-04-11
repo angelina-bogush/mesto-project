@@ -2,12 +2,14 @@
     background-color: #000;
     color: #fff;
     max-width: 358px;
-    width: 100%;
-    text-align: center;
     padding: 14px 0 18px 0;
-    margin: 0 auto 22px;
+    margin-top: 14px;
     border-radius: 2px;
     border: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    cursor: pointer;
 }
 
 .form__button:hover {
@@ -16,7 +18,10 @@
 @media (max-width:565px) {
     .form__button {
         max-width: 238px;
-        margin: 0 auto 26px;
         padding: 14px 0 14px 0;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        margin-top: 15px;
     }
 }

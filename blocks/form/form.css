@@ -1,18 +1,14 @@
-.form{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 430px;
+.form {
     width: 100%;
     background-color: #fff;
-    padding: 12px 0 12px 0;
-    border-radius: 10px;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
+
 @media (max-width:565px) {
     .form {
         max-width: 282px;
-        padding: 0;
+
     }
 }
