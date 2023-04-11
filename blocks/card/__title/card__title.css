@@ -9,4 +9,5 @@
   white-space: nowrap;
   overflow: hidden;
   max-width: calc(100% - 44px);
+  text-align: center;
 }

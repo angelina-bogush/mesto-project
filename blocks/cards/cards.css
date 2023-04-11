@@ -8,12 +8,6 @@
     margin: 0 auto;
 }
 
-@media (max-width:320px) {
-    .cards {
-        grid-template-columns: 1fr;
-    }
-}
-
 @media (max-width:1024px) {
     .cards {
         grid-template-columns: repeat(2, minmax(200px, 282px));
@@ -26,5 +20,11 @@
         max-width: 282px;
         padding: 0;
 
+    }
+}
+
+@media (max-width:320px) {
+    .cards {
+        grid-template-columns: 1fr;
     }
 }
