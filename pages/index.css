@@ -29,5 +29,3 @@
 @import url('../blocks/popup/__title/popup__title.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__logo/footer__logo.css');
-
-*{outline: 1px solid red;}
