@@ -15,13 +15,13 @@
             <img class="header__logo" src="./images/logo.svg" alt="Логотип сайта">
 
         </header>
-        <main>
+    <main>
         <section class="profile">
             <div class="profile__container">
                 <img class="profile__avatar" src="./images/Kusto.jpg" alt="Жак-Ив Кусто">
                 <div class="profile__text">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button" type="button"></button>
+                    <button aria-label="Кнопка редактирования" class="profile__edit-button" type="button"></button>
                     <p class="profile__subtitle">Исследователь Питера</p>
                 </div>
                 <button class="profile__add-button" type="button"></button>
@@ -32,42 +32,42 @@
                 <img class="card__image" src="./images/zenit.jpg" alt="Газпром-Арена">
                 <div class="card__text">
                     <h2 class="card__title">Газпром-арена</h2>
-                    <button class="card__like card__like_active" type="button"></button>
+                    <button aria-label="Кнопка добавить"class="card__like card__like_active" type="button"></button>
                 </div>
             </div>
             <div class="card">
                 <img class="card__image" src="./images/elagin.jpg" alt="Елагин остров">
                 <div class="card__text">
                     <h2 class="card__title">Елагин остров</h2>
-                    <button class="card__like" type="button"></button>
+                    <button aria-label="Кнопка лайк" class="card__like" type="button"></button>
                 </div>
             </div>
             <div class="card">
                 <img class="card__image" src="./images/kanon.jpg" alt="Канонерский остров">
                 <div class="card__text">
                     <h2 class="card__title">Канонерский остров</h2>
-                    <button class="card__like" type="button"></button>
+                    <button aria-label="Кнопка лайк" class="card__like" type="button"></button>
                 </div>
             </div>
             <div class="card">
                 <img class="card__image" src="./images/obvodniy.jpeg" alt="Обводный канал">
                 <div class="card__text">
                     <h2 class="card__title">Обводный</h2>
-                    <button class="card__like" type="button"></button>
+                    <button aria-label="Кнопка лайк" class="card__like" type="button"></button>
                 </div>
             </div>
             <div class="card">
                 <img class="card__image" src="./images/sad.jpg" alt="Ботанический сад">
                 <div class="card__text">
                     <h2 class="card__title">Ботанический сад</h2>
-                    <button class="card__like" type="button"></button>
+                    <button aria-label="Кнопка лайк" class="card__like" type="button"></button>
                 </div>
             </div>
             <div class="card">
                 <img class="card__image" src="./images/zaliv.jpg" alt="Финский залив">
                 <div class="card__text">
                     <h2 class="card__title">Финский залив</h2>
-                    <button class="card__like" type="button"></button>
+                    <button aria-label="Кнопка лайк" class="card__like" type="button"></button>
                 </div>
             </div>
         </section>
@@ -75,14 +75,14 @@
         <footer class="footer">
             <p class="footer__logo">© 2023 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup popup_opened">
             <div class="popup__container">
-                <h3 class="form__title">Редактировать профиль</h3>
-                <button class="form__close-icon" type="button"></button>
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <button aria-label="Кнопка закрыть" class="popup__close-icon" type="button"></button>
                 <form class="form" name="edit-profile">
                     <input class="form__input" type="text" name="name" placeholder="Жак-Ив Кусто">
                     <input class="form__input" type="text" name="description" placeholder="Исследователь Питера">
-                    <button class="form__button" type="submit">Сохранить</button>
+                    <button arial-label="Кнопка сохранить" class="form__button" type="submit">Сохранить</button>
             </form>
         </div>
         </div>
