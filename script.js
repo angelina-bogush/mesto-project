@@ -11,6 +11,7 @@ closeIcon.addEventListener('click', function closePopup() {
 /*form*/
 const form = document.querySelector('.form');
 let formName = form.querySelector('.form__input_theme_name');
+console.log(typeof formName);
 let formDescription = form.querySelector('.form__input_theme_description');
 const buttonSubmit = form.querySelector('.form__button');
 let profileTitle = profile.querySelector('.profile__title');
@@ -22,3 +23,12 @@ buttonSubmit.addEventListener('click', function formSubmit(evt){
     profileSubtitle.textContent = formDescription.value;
     popup.classList.remove('popup_opened');
     });
+    
+//likes
+
+let cardLike = document.querySelectorAll('.card__like');
+cardLike.forEach((item) => item.addEventListener('click', function addClass(){
+    item.classList.toggle('card__like_active');
+    }));
+
+
