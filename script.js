@@ -25,32 +25,67 @@ buttonSubmit.addEventListener('click', function formSubmit(evt){
     popup.classList.remove('popup_opened');
     });
 
-//добавление карточки
+    //массив из содержимого карточек
+
+    const contentCards = [
+        {
+            name: 'Архыз',
+          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        },
+        {
+          name: 'Челябинская область',
+          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+        },
+        {
+          name: 'Иваново',
+          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+        },
+        {
+          name: 'Камчатка',
+          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+        },
+        {
+          name: 'Холмогорский район',
+          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+        },
+        {
+          name: 'Байкал',
+          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+        }
+      ];
+/*const contentCardsNames = contentCards.map(item => {
+    return item.name;
+})                                                      //массивы отдельно с именами и ссылками
+const contentCardsLinks = contentCards.map(item => {
+    return item.link;
+})*/
+
+//Создание карточки
 
 const cardContainer = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#template-card').content; //добавили template
-const newCard = cardTemplate.querySelector('.card').cloneNode(true);  //клонировали карточку
+const addCard = function(cardName, cardLink){
+    const newCard = cardTemplate.querySelector('.card').cloneNode(true);  //клонировали карточку
+    const newCardText = cardTemplate.querySelector('.card__text');  //текст карточки
+    const newCardName = newCardText.querySelector('.card__title'); // Название карточки
+    const newCardImage = newCard.querySelector('.card__image');  // картинка карточки
+    newCardName.textContent = cardName; // добавление заголовка карточки
+    newCardImage.src = cardLink;  //ссылка на картинку карточки (значение из формы)
+    newCardImage.alt = cardName;
+    cardContainer.append(newCard);
+    console.log(newCardImage.alt);
+    console.log(newCardName.textContent);
+};
 
-const newCardText = cardTemplate.querySelector('.card__text');  //текст карточки
-const newCardImage = newCard.querySelector('.card__image');  // картинка карточки
-const newCardLike = newCardText.querySelector('button');
-newCardImage.src ='/images/zenit.jpg';  //ссылка на картинку карточки (значение из формы)
-newCardImage.alt = 'Газпром-Арена'; //значение из формы ???
+// добаление карточек на страницу
 
-newCardText.querySelector('.card__title').textContent = //значение из формы (заголовок)
-cardContainer.append(newCard); // добавили карточку на страницу
-
-cardContainer.append(newCard);
+contentCards.forEach(info => {
+    addCard(info.name, info.link);
+})
 
 
-
-/*function addCard(newCard){
-    cardContainer.append(newCard)
-}*/
-
-//likes
+// Лайки
 const cardLike = document.querySelectorAll('.card__like');
 cardLike.forEach((item) => item.addEventListener('click', function addClass(){
     item.classList.toggle('card__like_active');
-    console.log('clicked');
     }));
