@@ -1,6 +1,7 @@
-let profile = document.querySelector('.profile');
-let editButton = profile.querySelector('.profile__edit-button');
-let popup = document.querySelector('.popup');
+//открытие и зактрытие основного попапа
+const profile = document.querySelector('.profile');
+const editButton = profile.querySelector('.profile__edit-button');
+const popup = document.querySelector('.popup');
 editButton.addEventListener('click', function openPopup() {
     popup.classList.add('popup_opened');
 });
@@ -8,14 +9,14 @@ let closeIcon = popup.querySelector('.popup__close-icon');
 closeIcon.addEventListener('click', function closePopup() {
     popup.classList.remove('popup_opened');
 });
-/*form*/
+
+//изменение имени в форме
 const form = document.querySelector('.form');
-let formName = form.querySelector('.form__input_theme_name');
-console.log(typeof formName);
-let formDescription = form.querySelector('.form__input_theme_description');
+const formName = form.querySelector('.form__input_theme_name');
+const formDescription = form.querySelector('.form__input_theme_description');
 const buttonSubmit = form.querySelector('.form__button');
-let profileTitle = profile.querySelector('.profile__title');
-let profileSubtitle = profile.querySelector('.profile__subtitle');
+const profileTitle = profile.querySelector('.profile__title');
+const profileSubtitle = profile.querySelector('.profile__subtitle');
 
 buttonSubmit.addEventListener('click', function formSubmit(evt){
     evt.preventDefault();
@@ -24,11 +25,12 @@ buttonSubmit.addEventListener('click', function formSubmit(evt){
     popup.classList.remove('popup_opened');
     });
     
-//likes
+// likes
 
 let cardLike = document.querySelectorAll('.card__like');
 cardLike.forEach((item) => item.addEventListener('click', function addClass(){
     item.classList.toggle('card__like_active');
+    console.log('clicked');
     }));
 
 
