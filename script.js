@@ -5,7 +5,7 @@ const popup = document.querySelector('.popup');
 editButton.addEventListener('click', function openPopup() {
     popup.classList.add('popup_opened');
 });
-let closeIcon = popup.querySelector('.popup__close-icon');
+const closeIcon = popup.querySelector('.popup__close-icon');
 closeIcon.addEventListener('click', function closePopup() {
     popup.classList.remove('popup_opened');
 });
@@ -24,13 +24,33 @@ buttonSubmit.addEventListener('click', function formSubmit(evt){
     profileSubtitle.textContent = formDescription.value;
     popup.classList.remove('popup_opened');
     });
-    
-// likes
 
-let cardLike = document.querySelectorAll('.card__like');
+//добавление карточки
+
+const cardContainer = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#template-card').content; //добавили template
+const newCard = cardTemplate.querySelector('.card').cloneNode(true);  //клонировали карточку
+
+const newCardText = cardTemplate.querySelector('.card__text');  //текст карточки
+const newCardImage = newCard.querySelector('.card__image');  // картинка карточки
+const newCardLike = newCardText.querySelector('button');
+newCardImage.src ='/images/zenit.jpg';  //ссылка на картинку карточки (значение из формы)
+newCardImage.alt = 'Газпром-Арена'; //значение из формы ???
+
+newCardText.querySelector('.card__title').textContent = //значение из формы (заголовок)
+cardContainer.append(newCard); // добавили карточку на страницу
+
+cardContainer.append(newCard);
+
+
+
+/*function addCard(newCard){
+    cardContainer.append(newCard)
+}*/
+
+//likes
+const cardLike = document.querySelectorAll('.card__like');
 cardLike.forEach((item) => item.addEventListener('click', function addClass(){
     item.classList.toggle('card__like_active');
     console.log('clicked');
     }));
-
-
