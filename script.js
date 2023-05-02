@@ -65,6 +65,8 @@ const contentCardsLinks = contentCards.map(item => {
 const cardContainer = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#template-card').content; //добавили template
 const addCard = function(cardName, cardLink){
+    console.log(cardName);
+    console.log(cardLink);
     const newCard = cardTemplate.querySelector('.card').cloneNode(true);  //клонировали карточку
     const newCardText = cardTemplate.querySelector('.card__text');  //текст карточки
     const newCardName = newCardText.querySelector('.card__title'); // Название карточки
@@ -73,8 +75,6 @@ const addCard = function(cardName, cardLink){
     newCardImage.src = cardLink;  //ссылка на картинку карточки (значение из формы)
     newCardImage.alt = cardName;
     cardContainer.append(newCard);
-    console.log(newCardImage.alt);
-    console.log(newCardName.textContent);
 };
 
 // добаление карточек на страницу
