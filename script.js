@@ -47,19 +47,6 @@ buttonSubmit.addEventListener('click', function submitForm(evt){
     });
 
 
-   /* // добавление карточек на страницу пользователем 
-const formAdd = page.querySelector('.form_add-card');
-const formNameCard = formAdd.querySelector('.form__input_theme_name-card');
-const formLink = formAdd.querySelector('.form__input_theme_link');
-const buttonCreate = formAdd.querySelector('.form__button_create');
-
-/*buttonCreate.addEventListener('click', function createForm(evt){
-    evt.preventDefault();
-    
-})
-
-console.log(buttonCreate)*/
-
   //массив из содержимого карточек
 
     const contentCards = [
