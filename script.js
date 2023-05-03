@@ -37,7 +37,6 @@ closeIconAdd.addEventListener("click", () => {
  
 
 //изменение имени в форме редактирования профиля
-//const form = document.querySelector('.form');
 const formEdit = page.querySelector(".form_edit");
 const formName = formEdit.querySelector(".form__input_theme_name");
 const formDescription = formEdit.querySelector(
@@ -121,20 +120,10 @@ cardImage.forEach((item) =>
   );
   closeIconPhoto.forEach((item) =>
     item.addEventListener("click", () => {
-      closePopup(popupPhoto);
+      closePopup(popupPhoto);                                    //закрыть попап фото
     })
   );
-  /*cardImage.forEach((item) =>
-    item.addEventListener("click", () => {
-      openPopup(popupPhoto);    
-                              
-    })
-  );
-  closeIconPhoto.forEach((item) =>
-    item.addEventListener("click", () => {
-      closePopup(popupPhoto);
-    })
-  );*/
+  
   cardLike.forEach((item) =>
     item.addEventListener("click", function addClass(evt) {
       const eventTarget = evt.target;
@@ -164,6 +153,7 @@ contentCards.forEach((info) => {
  
  
   // добавление карточек на страницу пользователем 
+  
  const formAdd = page.querySelector('.form_add-card');
  const formNameCard = formAdd.querySelector('.form__input_theme_name-card');
  const formLink = formAdd.querySelector('.form__input_theme_link');
@@ -177,5 +167,4 @@ contentCards.forEach((info) => {
      popupAddCard.classList.remove('popup_opened');
      })
      
-//открытие просмотра фотографий (открытие попапа)
 
