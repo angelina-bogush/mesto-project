@@ -110,10 +110,10 @@ const addCard = function (cardName, cardLink, cardId) {
   
 const cardClick = function(){                                        // открытие попапа картинки
   popupPhotoImage.src = cardLink;
-  popupPhotoImage.alt = cardLink;
+  popupPhotoImage.alt = cardName;
   popupPhotoDescription.textContent = cardName;
   openPopup(popupPhoto);
-}
+};
 
 cardImage.forEach((item) =>
     item.addEventListener("click", () => {
