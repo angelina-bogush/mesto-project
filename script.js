@@ -51,68 +51,85 @@ buttonSubmit.addEventListener('click', function submitForm(evt){
 
     const contentCards = [
         {
-            name: 'Архыз',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+            name: 'Петергоф',
+          link: 'https://images.unsplash.com/photo-1635700453672-8e93c5f2e280?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'
         },
         {
-          name: 'Челябинская область',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+          name: 'Исаакиевский Собор',
+          link: 'https://images.unsplash.com/photo-1555460285-763ba96917d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
         },
         {
-          name: 'Иваново',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+          name: 'Лахта центр',
+          link: 'https://images.unsplash.com/photo-1539203645471-3ae5d31e0eca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80'
         },
         {
-          name: 'Камчатка',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+          name: 'Казанский собор',
+          link: 'https://images.unsplash.com/photo-1551005756-fd0657e8fbf2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c2FpbnQlMjBwZXRlcnNidXJnfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'
         },
         {
-          name: 'Холмогорский район',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+          name: 'Невский проспект',
+          link: 'https://images.unsplash.com/photo-1626103254920-d8c4069554da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTl8fHNhaW50JTIwcGV0ZXJzYnVyZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60'
         },
         {
-          name: 'Байкал',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+          name: 'Пушкин',
+          link: 'https://images.unsplash.com/photo-1573551673739-6075df0508c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fHNhaW50JTIwcGV0ZXJzYnVyZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60'
         }
       ];
 
 //Создание карточки
-
 const cardContainer = page.querySelector('.cards');
 const cardTemplate = page.querySelector('#template-card').content; //добавили template
-const addCard = function(cardName, cardLink){
+const createCard = function(cardName, cardLink){
     const newCard = cardTemplate.querySelector('.card').cloneNode(true);  //клонировали карточку
     const newCardName = newCard.querySelector('.card__title'); // Название карточки
     const newCardImage = newCard.querySelector('.card__image');  // картинка карточки
     newCardName.textContent = cardName; // добавление заголовка карточки
     newCardImage.src = cardLink;  //ссылка на картинку карточки (значение из формы)
     newCardImage.alt = cardName;
-    cardContainer.append(newCard);
+    return newCard;
 };
+const addCard = function(cardName, cardLink) {
+  const newCard = createCard(cardName, cardLink);
+  const cardLike = newCard.querySelectorAll('.card__like');
+  const buttonTrash = newCard.querySelectorAll('.card__trash');
+  /*cardLike.addEventListener('click', function addClass(){
+    cardLike.classList.toggle('card__like_active');          
+      });*/
+  cardLike.forEach((item) => item.addEventListener('click', function addClass(evt){
+  const eventTarget = evt.target;
+  eventTarget.classList.toggle('card__like_active');           //лайк
+      }));
 
-// добавление карточек на страницу
+  buttonTrash.forEach((item) => item.addEventListener('click', function deleteCard(){
+      const cardToDelete = document.querySelector('.card');
+      cardToDelete.remove();                                  //удаление карточки
+     }));
+
+  cardContainer.prepend(newCard)};
 
 contentCards.forEach(info => {
-    addCard(info.name, info.link);
-})
+  addCard(info.name, info.link)})
 
- // добавление карточек на страницу пользователем 
+  /*const cardLike = document.querySelectorAll('.card__like');
+  cardLike.forEach((item) => item.addEventListener('click', function addClass(evt){
+    const eventTarget = evt.target;
+    eventTarget.classList.toggle('card__like_active');          
+      }));*/
+ 
+ 
+  // добавление карточек на страницу пользователем 
  const formAdd = page.querySelector('.form_add-card');
  const formNameCard = formAdd.querySelector('.form__input_theme_name-card');
  const formLink = formAdd.querySelector('.form__input_theme_link');
  const buttonCreate = formAdd.querySelector('.form__button_create');
  
- buttonCreate.addEventListener('click', function createForm(evt){
+    buttonCreate.addEventListener('click', function createForm(evt){
      evt.preventDefault();
      const userCardName = formNameCard.value;
      const userCardLink = formLink.value;
      addCard(userCardName, userCardLink);
      popupAddCard.classList.remove('popup_opened');
+     })
      
- })
 
-// Лайки
-const cardLike = page.querySelectorAll('.card__like');
-cardLike.forEach((item) => item.addEventListener('click', function addClass(){
-    item.classList.toggle('card__like_active');
-    }));
+    
