@@ -92,6 +92,10 @@ const addCard = function(cardName, cardLink) {
   const newCard = createCard(cardName, cardLink);
   const cardLike = newCard.querySelectorAll('.card__like');
   const buttonTrash = newCard.querySelectorAll('.card__trash');
+  const cardImage = newCard.querySelectorAll('.card__image');
+  /*cardImage.forEach((item) => item.addEventListener('click', () => {
+    openPopup(...)
+  })*/
   /*cardLike.addEventListener('click', function addClass(){
     cardLike.classList.toggle('card__like_active');          
       });*/
@@ -131,5 +135,6 @@ contentCards.forEach(info => {
      popupAddCard.classList.remove('popup_opened');
      })
      
+//открытие просмотра фотографий (открытие попапа)
 
-    
+//const popupPhoto
