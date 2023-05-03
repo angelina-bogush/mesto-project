@@ -1,3 +1,7 @@
 .popup_theme_photo{
-    
+    background-color: rgba(0, 0, 0, .9);
+    top: 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
