@@ -43,6 +43,7 @@
 @import url('../blocks/popup/__close-icon/popup__close-icon.css');
 @import url('../blocks/popup/__close-icon/_edit/popup__close-icon_edit.css');
 @import url('../blocks/popup/__close-icon/_add-card/popup__close-icon_add-card.css');
+@import url('../blocks/popup/__close-icon/_photo/popup__close-icon_photo.css');
 @import url('../blocks/popup/__title/popup__title.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__logo/footer__logo.css');
