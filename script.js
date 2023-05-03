@@ -10,7 +10,6 @@ const popupAddCard = page.querySelector('.popup_theme_add-card');
 //const popupPhoto = page.querySelector('.popup_theme_photo');
 const addButton = profile.querySelector('.profile__add-button'); //кнопка добавления карточки
 const closeIconAdd = page.querySelector('.popup__close-icon_add-card');  // закрытие окна добавления карточки
-const closeIcon = popup.querySelector('.popup__close-icon'); // общяя кнопка закрытия окна (?)
 const closeIconEdit = popup.querySelector('.popup__close-icon_edit');  // закрытие окна редактирования профиля
 const closeIconPhoto = page.querySelectorAll('.popup__close-icon_photo');
 
