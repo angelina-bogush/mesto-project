@@ -9,6 +9,8 @@ const popupAddCard = page.querySelector('.popup_theme_add-card');
 const buttonAdd = profile.querySelector('.profile__add-button'); 
 const popupClosingIcon = page.querySelectorAll('.popup__close-icon');
 
+
+
 function openPopup(popupName) {
   popupName.classList.add("popup_opened");
 }
