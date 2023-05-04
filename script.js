@@ -4,7 +4,6 @@ const profile = page.querySelector('.profile');
 const profileTitle = profile.querySelector(".profile__title");
 const profileSubtitle = profile.querySelector(".profile__subtitle");
 const buttonEdit = profile.querySelector('.profile__edit-button'); 
-//const popup = page.querySelector('.popup');
 const popupEditProfile = page.querySelector('.popup_theme_edit');
 const popupAddCard = page.querySelector('.popup_theme_add-card');
 const buttonAdd = profile.querySelector('.profile__add-button'); 
@@ -57,6 +56,7 @@ const formAdd = page.querySelector('.form_add-card');
 const newCardObj = {
 name: formAdd.querySelector('.form__input_theme_name-card').value,
 link: formAdd.querySelector('.form__input_theme_link').value }
+
 
 const createCard = function (newCardObj) {
   const newCard = cardTemplate.querySelector(".card").cloneNode(true); 
