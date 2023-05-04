@@ -1,13 +1,15 @@
 //открытие и зактрытие основного попапа
 const page = document.querySelector('.page');
 const profile = page.querySelector('.profile');
+const profileTitle = profile.querySelector(".profile__title");
+const profileSubtitle = profile.querySelector(".profile__subtitle");
 const buttonEdit = profile.querySelector('.profile__edit-button'); 
-const popup = page.querySelector('.popup');
+//const popup = page.querySelector('.popup');
 const popupEditProfile = page.querySelector('.popup_theme_edit');
 const popupAddCard = page.querySelector('.popup_theme_add-card');
 const buttonAdd = profile.querySelector('.profile__add-button'); 
 const closingIconAdd = page.querySelector('.popup__close-icon_add-card');  
-const closingIconEdit = popup.querySelector('.popup__close-icon_edit');  
+const closingIconEdit = popupEditProfile.querySelector('.popup__close-icon_edit');  
 const closingIconPhotos = page.querySelectorAll('.popup__close-icon_photo');
 
 function openPopup(popupName) {
@@ -17,7 +19,11 @@ function closePopup(popupName) {
   popupName.classList.remove("popup_opened");
 }
 
+const formUserName = popupEditProfile.querySelector('.form__input_theme_name');
+const formUserDescription = popupEditProfile.querySelector('.form__input_theme_description');
 buttonEdit.addEventListener("click", () => {
+  formUserName.value = profileTitle.textContent;
+  formUserDescription.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
 });
 buttonAdd.addEventListener("click", () => {
@@ -38,8 +44,6 @@ const formDescription = formEdit.querySelector(
   ".form__input_theme_description"
 );
 const buttonSubmit = formEdit.querySelector(".form__button_submit");
-const profileTitle = profile.querySelector(".profile__title");
-const profileSubtitle = profile.querySelector(".profile__subtitle");
 
 buttonSubmit.addEventListener("click", function submitForm(evt) {
   evt.preventDefault();
