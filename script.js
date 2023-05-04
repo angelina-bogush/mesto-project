@@ -53,20 +53,25 @@ formEdit.addEventListener('submit', submitForm);
 const cardContainer = page.querySelector(".cards");
 const cardTemplate = page.querySelector("#template-card").content; 
 
-const createCard = function (cardName, cardLink,) {
+const formAdd = page.querySelector('.form_add-card');
+const newCardObj = {
+name: formAdd.querySelector('.form__input_theme_name-card').value,
+link: formAdd.querySelector('.form__input_theme_link').value }
+
+const createCard = function (newCardObj) {
   const newCard = cardTemplate.querySelector(".card").cloneNode(true); 
   const newCardName = newCard.querySelector(".card__title"); 
   const newCardImage = newCard.querySelector(".card__image"); 
-  newCardName.textContent = cardName; 
-  newCardImage.src = cardLink; 
-  newCardImage.alt = cardName;
+  newCardName.textContent = newCardObj['name']; 
+  newCardImage.src = newCardObj['link']; 
+  newCardImage.alt = newCardObj['name'];
   const cardLikes = newCard.querySelectorAll(".card__like");
   const buttonsTrash = newCard.querySelectorAll(".card__trash");
   const cardImages = newCard.querySelectorAll(".card__image");
 const clickCard = function(){                                        // открытие попапа картинки
-  popupPhotoImage.src = cardLink;
-  popupPhotoImage.alt = cardName;
-  popupPhotoDescription.textContent = cardName;
+  popupPhotoImage.src = newCardObj['link'];
+  popupPhotoImage.alt = newCardObj['name'];
+  popupPhotoDescription.textContent = newCardObj['name'];
   openPopup(popupPhoto);
 };
 cardImages.forEach((item) =>
@@ -95,25 +100,23 @@ const popupPhoto = page.querySelector('.popup_theme_photo');
 const popupPhotoImage = popupPhoto.querySelector('.popup__image');
 const popupPhotoDescription = popupPhoto.querySelector('.popup__description');
 
-const addCard = function (cardName, cardLink) {
-  const newCard = createCard(cardName, cardLink);
+const addCard = function (newCardObj) {
+  const newCard = createCard(newCardObj);
   cardContainer.prepend(newCard);
 };
 
 contentCards.forEach((info) => {
-  addCard(info.name, info.link);
+  addCard(info);
 });
   // добавление карточек на страницу пользователем 
-  
- const formAdd = page.querySelector('.form_add-card');
- const formNameCard = formAdd.querySelector('.form__input_theme_name-card');
- const formLink = formAdd.querySelector('.form__input_theme_link');
- 
+
  function createForm(evt){
   evt.preventDefault();
-  const userCardName = formNameCard.value;
-  const userCardLink = formLink.value;
-  addCard(userCardName, userCardLink);
+  const newCardObj = {
+    name: formAdd.querySelector('.form__input_theme_name-card').value,
+    link: formAdd.querySelector('.form__input_theme_link').value
+  };
+  addCard(newCardObj);
   closePopup(popupAddCard);
   formAdd.reset();
   };  
