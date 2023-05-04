@@ -8,9 +8,7 @@ const buttonEdit = profile.querySelector('.profile__edit-button');
 const popupEditProfile = page.querySelector('.popup_theme_edit');
 const popupAddCard = page.querySelector('.popup_theme_add-card');
 const buttonAdd = profile.querySelector('.profile__add-button'); 
-const closingIconAdd = page.querySelector('.popup__close-icon_add-card');  
-const closingIconEdit = popupEditProfile.querySelector('.popup__close-icon_edit');  
-const closingIconPhotos = page.querySelectorAll('.popup__close-icon_photo');
+const popupClosingIcon = page.querySelectorAll('.popup__close-icon');
 
 function openPopup(popupName) {
   popupName.classList.add("popup_opened");
@@ -29,13 +27,11 @@ buttonEdit.addEventListener("click", () => {
 buttonAdd.addEventListener("click", () => {
   openPopup(popupAddCard);
 });
-closingIconEdit.addEventListener("click", () => {
-  closePopup(popupEditProfile);
-});
-closingIconAdd.addEventListener("click", () => {
-  closePopup(popupAddCard);
-});
- 
+//закрытие всех попапов
+popupClosingIcon.forEach((icon) => icon.addEventListener('click', () => {
+const iconsPopup = icon.closest('.popup');
+  closePopup(iconsPopup)                                   
+}));
 
 //изменение имени в форме редактирования профиля
 const formEdit = page.querySelector(".form_edit");
@@ -53,53 +49,17 @@ function submitForm(evt) {
 }
 formEdit.addEventListener('submit', submitForm);
 
-  //массив из содержимого карточек
-
-    const contentCards = [
-      {
-        id: '1',
-        name: "Петергоф",
-        link: "https://images.unsplash.com/photo-1635700453672-8e93c5f2e280?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-      },
-      {
-        id:'2',
-        name: "Исаакиевский Собор",
-        link: "https://images.unsplash.com/photo-1555460285-763ba96917d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-      },
-      {
-        id:'3',
-        name: "Лахта центр",
-        link: "https://images.unsplash.com/photo-1539203645471-3ae5d31e0eca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80",
-      },
-      {
-        id: '4',
-        name: "Казанский собор",
-        link: "https://images.unsplash.com/photo-1551005756-fd0657e8fbf2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8c2FpbnQlMjBwZXRlcnNidXJnfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: '5',
-        name: "Невский проспект",
-        link: "https://images.unsplash.com/photo-1626103254920-d8c4069554da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTl8fHNhaW50JTIwcGV0ZXJzYnVyZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-      },
-      {
-        id: '6',
-        name: "Пушкин",
-        link: "https://images.unsplash.com/photo-1573551673739-6075df0508c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDl8fHNhaW50JTIwcGV0ZXJzYnVyZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-      },
-    ];
-
 //Создание карточки
 const cardContainer = page.querySelector(".cards");
 const cardTemplate = page.querySelector("#template-card").content; 
 
-const createCard = function (cardName, cardLink, cardId) {
+const createCard = function (cardName, cardLink,) {
   const newCard = cardTemplate.querySelector(".card").cloneNode(true); 
   const newCardName = newCard.querySelector(".card__title"); 
   const newCardImage = newCard.querySelector(".card__image"); 
   newCardName.textContent = cardName; 
   newCardImage.src = cardLink; 
   newCardImage.alt = cardName;
-  newCard.id = cardId;
   const cardLikes = newCard.querySelectorAll(".card__like");
   const buttonsTrash = newCard.querySelectorAll(".card__trash");
   const cardImages = newCard.querySelectorAll(".card__image");
@@ -114,11 +74,6 @@ cardImages.forEach((item) =>
       clickCard();                         
     })
   );
-  closingIconPhotos.forEach((item) =>
-    item.addEventListener("click", () => {
-      closePopup(popupPhoto);                                    //закрыть попап фото
-    })
-  );
   
   cardLikes.forEach((item) =>
     item.addEventListener("click", function addClass(evt) {
@@ -128,8 +83,8 @@ cardImages.forEach((item) =>
   );
 
   buttonsTrash.forEach((item) =>
-    item.addEventListener("click", function deleteCard() {
-      const cardToDelete = document.getElementById(cardId);
+    item.addEventListener("click", function deleteCard(evt) {
+      const cardToDelete = evt.target.closest('.card');
       cardToDelete.remove();                            //удаление карточки
     })
   );
@@ -140,13 +95,13 @@ const popupPhoto = page.querySelector('.popup_theme_photo');
 const popupPhotoImage = popupPhoto.querySelector('.popup__image');
 const popupPhotoDescription = popupPhoto.querySelector('.popup__description');
 
-const addCard = function (cardName, cardLink, cardId) {
-  const newCard = createCard(cardName, cardLink, cardId);
+const addCard = function (cardName, cardLink) {
+  const newCard = createCard(cardName, cardLink);
   cardContainer.prepend(newCard);
 };
 
 contentCards.forEach((info) => {
-  addCard(info.name, info.link, info.id);
+  addCard(info.name, info.link);
 });
   // добавление карточек на страницу пользователем 
   
@@ -158,8 +113,7 @@ contentCards.forEach((info) => {
   evt.preventDefault();
   const userCardName = formNameCard.value;
   const userCardLink = formLink.value;
- // const userCardId = String(contentCards.length + 1);
-  addCard(userCardName, userCardLink, userCardId);
+  addCard(userCardName, userCardLink);
   closePopup(popupAddCard);
   formAdd.reset();
   };  
