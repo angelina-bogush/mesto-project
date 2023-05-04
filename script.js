@@ -44,15 +44,14 @@ const formDescription = formEdit.querySelector(
   ".form__input_theme_description"
 );
 const buttonSubmit = formEdit.querySelector(".form__button_submit");
-
-buttonSubmit.addEventListener("click", function submitForm(evt) {
+function submitForm(evt) {
   evt.preventDefault();
   profileTitle.textContent = formName.value;
   profileSubtitle.textContent = formDescription.value;
-  popupEditProfile.classList.remove("popup_opened");
+  closePopup(popupEditProfile);
   formEdit.reset();
-});
-
+}
+formEdit.addEventListener('submit', submitForm);
 
   //массив из содержимого карточек
 
