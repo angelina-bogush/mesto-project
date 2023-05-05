@@ -39,13 +39,11 @@ const formName = formEdit.querySelector(".form__input_theme_name");
 const formDescription = formEdit.querySelector(
   ".form__input_theme_description"
 );
-//const buttonSubmit = formEdit.querySelector(".form__button_submit");
 function submitForm(evt) {
   evt.preventDefault();
   profileTitle.textContent = formName.value;
   profileSubtitle.textContent = formDescription.value;
   closePopup(popupEditProfile);
-  formEdit.reset();
 }
 formEdit.addEventListener('submit', submitForm);
 
@@ -66,34 +64,26 @@ const createCard = function (newCardObj) {
   newCardName.textContent = newCardObj['name']; 
   newCardImage.src = newCardObj['link']; 
   newCardImage.alt = newCardObj['name'];
-  const cardLikes = newCard.querySelectorAll(".card__like");
-  const buttonsTrash = newCard.querySelectorAll(".card__trash");
-  const cardImages = newCard.querySelectorAll(".card__image");
+  const cardLike = newCard.querySelector(".card__like");
+  const buttonTrash = newCard.querySelector(".card__trash");
+  const cardImage = newCard.querySelector(".card__image");
 const clickCard = function(){                                        // открытие попапа картинки
   popupPhotoImage.src = newCardObj['link'];
   popupPhotoImage.alt = newCardObj['name'];
   popupPhotoDescription.textContent = newCardObj['name'];
   openPopup(popupPhoto);
 };
-cardImages.forEach((item) =>
-    item.addEventListener("click", () => {
+cardImage.addEventListener("click", () => {
       clickCard();                         
     })
-  );
-  
-  cardLikes.forEach((item) =>
-    item.addEventListener("click", function addClass(evt) {
-      const eventTarget = evt.target;
-      eventTarget.classList.toggle("card__like_active");       //лайк
-    })
-  );
+  cardLike.addEventListener('click', function addClass(evt) {
+    const eventTarget = evt.target;
+    eventTarget.classList.toggle("card__like_active")});
 
-  buttonsTrash.forEach((item) =>
-    item.addEventListener("click", function deleteCard(evt) {
+  buttonTrash.addEventListener("click", function deleteCard(evt) {
       const cardToDelete = evt.target.closest('.card');
       cardToDelete.remove();                            //удаление карточки
     })
-  );
   return newCard;
 };
 
