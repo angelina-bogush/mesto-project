@@ -65,7 +65,7 @@ const createCard = function (newCardObj) {
   const buttonTrash = newCard.querySelector(".card__trash");
   const cardImage = newCard.querySelector(".card__image");
 
-  const clickCard = function(){                                 // открытие попапа картинки
+  const clickCard = function(){                // открытие попапа картинки
   popupPhotoImage.src = newCardObj['link'];
   popupPhotoImage.alt = newCardObj['name'];
   popupPhotoDescription.textContent = newCardObj['name'];
