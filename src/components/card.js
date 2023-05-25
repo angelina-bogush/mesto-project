@@ -1,6 +1,6 @@
-import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardLinkInput, cardNameInput, cardTemplate, popupPhoto} from './variables.js';
+import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardLinkInput, cardNameInput, cardTemplate, popupPhoto, popupAddCard} from './variables.js';
 import { contentCards } from '../array.js';
-import {closePopup, openPopup} from './modal.js';
+import {closePopup, openPopup} from './utils.js';
 
 const createCard = function (newCardObj) {
     const newCard = cardTemplate.querySelector(".card").cloneNode(true); 

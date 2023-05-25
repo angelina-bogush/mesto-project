@@ -2,7 +2,7 @@ import '../pages/index.css';
 import { formAdd, buttonEdit, formInputName, formDescription, popupEditProfile, buttonAdd, popupAddCard, popupClosingIcon, profileSubtitle, profileTitle, formEdit} from './components/variables';
 import {enableValidation} from './components/validate.js';
 import { createForm } from './components/card';
-import { closePopup, openPopup } from './components/modal';
+import { closePopup, openPopup } from './components/utils';
 
 buttonEdit.addEventListener("click", () => {
   formInputName.value = profileTitle.textContent;
@@ -27,7 +27,14 @@ function submitForm(evt) {
   closePopup(popupEditProfile);
 }
 formEdit.addEventListener('submit', submitForm);
+formAdd.addEventListener('submit',createForm);
 
-enableValidation()
+enableValidation({
+    formSelector: '.form',
+    formInput: '.form__input',
+    buttonSelector: '.form__button',
+    formErrorTheme: 'form__input_theme_error',
+    formInputError: 'form__input_error',
+    inactiveButtonClass: 'form__button_inactive'
+});
 
- formAdd.addEventListener('submit',createForm);
