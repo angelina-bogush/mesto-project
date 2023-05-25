@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    </head>
+    
+    
+    <body class="page">
+        <div class="page__container">
+            <header class="header">
+                <img class="header__logo" src="<%=require('../images/logo.svg')%>" alt="Логотип сайта">
+    
+            </header>
+            <main>
+                <section class="profile">
+                    <div class="profile__container">
+                        <img class="profile__avatar" src="<%=require('../images/Kusto.jpg')%>" alt="Жак-Ив Кусто">
+                        <div class="profile__text">
+                            <h1 class="profile__title">Жак-Ив Кусто</h1>
+                            <button aria-label="Кнопка редактирования" class="profile__edit-button" type="button"></button>
+                            <p class="profile__subtitle">Исследователь Питера</p>
+                        </div>
+                        <button class="profile__add-button" type="button"></button>
+                    </div>
+                </section>
+                <section class="cards">
+                </section>
+            </main>
+            <footer class="footer">
+                <p class="footer__logo">© 2023 Mesto Russia</p>
+            </footer>
+            <div class="popup popup_theme_edit">
+                <div class="popup__container">
+                    <h3 class="popup__title">Редактировать профиль</h3>
+                    <button aria-label="Кнопка закрыть" class="popup__close-icon" type="button"></button>
+                    <form class="form form_edit" name="editProfile" novalidate>
+                        <label>
+                            <input id="name-input" class="form__input form__input_theme_name" type="text" name="name"
+                                placeholder="Имя" minlength="2" maxlength="40" pattern="^[A-Za-zА-Яа-яЁё\-\s]+$"
+                                data-error-message="Разрешены только латинские буквы, кириллица, - и пробел" required>
+                            <span class="form__input_error name-input-error"></span>
+                        </label>
+                        <label>
+                            <input id="description-input" class="form__input form__input_theme_description" type="text"
+                                name="description" placeholder="Немного о себе" minlength="2" maxlength="200"
+                                pattern="^[A-Za-zА-Яа-яЁё\-\s]+$" data-error-message="Разрешены только латинские буквы, кириллица, - и пробел" required>
+                            <span class="form__input_error description-input-error"></span>
+                        </label>
+                        <button class="form__button form__button_submit" type="submit" disabled>Сохранить</button>
+                    </form>
+                </div>
+            </div>
+            <div class="popup popup_theme_add-card">
+                <div class="popup__container">
+                    <h3 class="popup__title">Новое место</h3>
+                    <button aria-label="Кнопка закрыть" class="popup__close-icon" type="button"></button>
+                    <form class="form form_add-card" name="addCard" novalidate>
+                        <label>
+                            <input id="name-card-input" class="form__input form__input_theme_name-card" type="text"
+                                name="name" placeholder="Название" minlength="2" maxlength="30"
+                                pattern="^[A-Za-zА-Яа-яЁё\-\s]+$" data-error-message="Разрешены только латинские буквы, кириллица, - и пробел" required>
+                            <span class="form__input_error name-card-input-error"></span>
+                        </label>
+                        <label>
+                            <input id="link-input" class="form__input form__input_theme_link" type="url" name="description"
+                                placeholder="Ссылка на картинку" required>
+                            <span class="form__input_error link-input-error"></span>
+                        </label>
+                        <button class="form__button form__button_create" type="submit">Создать</button>
+                    </form>
+                </div>
+            </div>
+            <div class="popup popup_theme_photo">
+                <div class="popup__content">
+                    <button aria-label="Кнопка закрыть" class="popup__close-icon" type="button"></button>
+                    <img class="popup__image" src=" " alt=" ">
+                    <p class="popup__description"></p>
+                </div>
+            </div>
+        </div>
+        <template id="template-card">
+            <div class="card">
+                <img class="card__image">
+                <div class="card__text">
+                    <h2 class="card__title"></h2>
+                    <button aria-label="Кнопка добавить" class="card__like" type="button"></button>
+                </div>
+                <button class="card__trash" type="button" aria-label="Кнопка удалить"></button>
+            </div>
+        </template>
+    </body>
+    
+    </html>
