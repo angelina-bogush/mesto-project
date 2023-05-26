@@ -1,13 +1,13 @@
-import {popups} from './variables';
+import { closePopup } from "./utils";
+import { popups } from "./variables";
 //закрытие всех попапов
-function closeAllPopups() {
+export function closeAllPopups() {
   popups.forEach((popup) => {
     if (popup.classList.contains("popup_opened")) {
       closePopup(popup);
     }
   });
 }
-
 //закрытие попапов на оверлей
 popups.forEach((overlay) =>
   overlay.addEventListener("click", (evt) => {
@@ -16,9 +16,3 @@ popups.forEach((overlay) =>
     }
   })
 );
-// закрытие на esc
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeAllPopups();
-  }
-});

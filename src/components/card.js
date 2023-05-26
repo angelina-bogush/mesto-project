@@ -1,5 +1,5 @@
 import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardLinkInput, cardNameInput, cardTemplate, popupPhoto, popupAddCard} from './variables.js';
-import { contentCards } from '../array.js';
+import { contentCards } from './array.js';
 import {closePopup, openPopup} from './utils.js';
 
 const createCard = function (newCardObj) {
