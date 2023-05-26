@@ -20,3 +20,5 @@ export const popupPhotoImage = popupPhoto.querySelector('.popup__image');
 export const popupPhotoDescription = popupPhoto.querySelector('.popup__description');
 export const cardContainer = page.querySelector(".cards");
 export const cardTemplate = page.querySelector("#template-card").content; 
+export const formCreateButton = page.querySelector('.form__button_create');
+export const formSubmitButton = page.querySelector('.form__button_submit')

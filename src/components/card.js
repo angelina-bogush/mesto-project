@@ -1,7 +1,6 @@
-import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardLinkInput, cardNameInput, cardTemplate, popupPhoto, popupAddCard} from './variables.js';
+import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardLinkInput, cardNameInput, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
 import { contentCards } from './array.js';
-import {closePopup, openPopup} from './utils.js';
-
+import {closePopup, openPopup, disableButton} from './utils.js';
 const createCard = function (newCardObj) {
     const newCard = cardTemplate.querySelector(".card").cloneNode(true); 
     const newCardName = newCard.querySelector(".card__title"); 
@@ -19,9 +18,7 @@ const createCard = function (newCardObj) {
     popupPhotoDescription.textContent = newCardObj['name'];
     openPopup(popupPhoto);
   };
-    cardImage.addEventListener("click", () => {
-        clickCard();                         
-      })
+    cardImage.addEventListener("click", clickCard);
     cardLike.addEventListener('click', function addClass(evt) {
       const eventTarget = evt.target;
       eventTarget.classList.toggle("card__like_active")});
@@ -41,13 +38,14 @@ const createCard = function (newCardObj) {
     addCard(info);
   });
     // добавление карточек на страницу пользователем 
-export function createForm(evt){
-    evt.preventDefault();
-    const newCardObj = {
-      name: cardNameInput.value,
-      link: cardLinkInput.value
-    };
-    addCard(newCardObj);
-    closePopup(popupAddCard);
-    formAdd.reset();
-    };  
+export function createCardFormSubmit(evt) {
+  evt.preventDefault();
+  const newCardObj = {
+    name: cardNameInput.value,
+    link: cardLinkInput.value,
+  };
+  addCard(newCardObj);
+  closePopup(popupAddCard);
+  formAdd.reset();
+  disableButton(formCreateButton)
+}

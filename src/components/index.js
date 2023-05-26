@@ -11,16 +11,17 @@ import {
   profileSubtitle,
   profileTitle,
   formEdit,
+  formCreateButton,
+  formSubmitButton
 } from "./variables";
 import { enableValidation } from "./validate.js";
-import { createForm } from "./card";
-import { closePopup, openPopup } from "./utils";
-import { closeAllPopups } from "./modal";
+import { createCardFormSubmit } from "./card";
+import { closePopup, disableButton, openPopup } from "./utils";
 
 buttonEdit.addEventListener("click", () => {
   formInputName.value = profileTitle.textContent;
   formDescription.value = profileSubtitle.textContent;
-  openPopup(popupEditProfile);
+  openPopup(popupEditProfile, formSubmitButton);
 });
 buttonAdd.addEventListener("click", () => {
   openPopup(popupAddCard);
@@ -33,22 +34,17 @@ popupClosingIcon.forEach((icon) =>
     closePopup(iconsPopup);
   })
 );
-//закрытие модальных окон на Esc
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeAllPopups();
-  }
-});
 
 //изменение имени в форме редактирования профиля
-function submitForm(evt) {
+function submitProfileForm(evt) {
   evt.preventDefault();
   profileTitle.textContent = formInputName.value;
   profileSubtitle.textContent = formDescription.value;
   closePopup(popupEditProfile);
+  disableButton(formSubmitButton);
 }
-formEdit.addEventListener("submit", submitForm);
-formAdd.addEventListener("submit", createForm);
+formEdit.addEventListener("submit", submitProfileForm);
+formAdd.addEventListener("submit", createCardFormSubmit);
 
 enableValidation({
   formSelector: ".form",
