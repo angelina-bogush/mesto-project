@@ -2,8 +2,7 @@ const handleCloseEscape = (event) => {
   if (event.key === "Escape") {
     const openedPopup =  document.querySelector('.popup_opened');
     closePopup(openedPopup);
-  } 
-}
+  } }
 
 export const disableButton = (buttonElement) => {
   buttonElement.disabled = true;
