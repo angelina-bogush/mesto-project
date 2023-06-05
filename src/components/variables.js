@@ -12,13 +12,20 @@ export const formInputName = formEdit.querySelector(".form__input_theme_name");
 export const formDescription = formEdit.querySelector(
   ".form__input_theme_description");
 export const formAdd = page.querySelector('.form_add-card');
+export const formAvatar = page.querySelector('.form_avatar');
 export const cardNameInput = page.querySelector('.form__input_theme_name-card');
 export const cardLinkInput =  formAdd.querySelector('.form__input_theme_link');
+export const avatarLinkInput = page.querySelector('.form__input_theme_avatar');
 export const popupPhoto = page.querySelector('.popup_theme_photo');
 export const popupClosingIcon = page.querySelectorAll('.popup__close-icon');
 export const popupPhotoImage = popupPhoto.querySelector('.popup__image');
 export const popupPhotoDescription = popupPhoto.querySelector('.popup__description');
+export const popupAvatar = page.querySelector('.popup_theme_avatar');
 export const cardContainer = page.querySelector(".cards");
 export const cardTemplate = page.querySelector("#template-card").content; 
 export const formCreateButton = page.querySelector('.form__button_create');
-export const formSubmitButton = page.querySelector('.form__button_submit')
+export const formSubmitButton = page.querySelector('.form__button_submit');
+// export const buttonSaveAvatar = page.querySelector('form__button_avatar');
+export const buttonAvatar = page.querySelector('.profile__overlay');
+export const profileAvatar = page.querySelector('.profile__avatar');
+

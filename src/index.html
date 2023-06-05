@@ -18,7 +18,13 @@
             <main>
                 <section class="profile">
                     <div class="profile__container">
+                        <div class="profile__container-avatar">
                         <img class="profile__avatar" src="<%=require('./images/Kusto.jpg')%>" alt="Жак-Ив Кусто">
+                        <div class="profile__overlay">
+                            <img src="<%=require('./images/avatarEdit.svg')%>" alt="" class="profile__overlay-image">
+                        </div>
+
+                       </div>
                         <div class="profile__text">
                             <h1 class="profile__title">Жак-Ив Кусто</h1>
                             <button aria-label="Кнопка редактирования" class="profile__edit-button" type="button"></button>
@@ -81,13 +87,38 @@
                     <p class="popup__description"></p>
                 </div>
             </div>
+            <div class="popup popup_theme_avatar">
+                <div class="popup__container">
+                    <h3 class="popup__title">Обновить аватар</h3>
+                    <button aria-label="Кнопка закрыть" class="popup__close-icon" type="button"></button>
+                    <form class="form form_avatar" name="editAvatar" novalidate>
+                        <label>
+                            <input id="avatar-input" class="form__input form__input_theme_avatar" type="url" name="avatar"
+                                placeholder="Введите ссылку" required>
+                            <span class="form__input_error avatar-input-error"></span>
+                        </label>
+                        <button class="form__button form__button_avatar" type="submit" disabled>Сохранить</button>
+                    </form>
+                </div>
+            </div>
+            <div class="popup popup_theme_delete">
+                <div class="popup__container">
+                    <h3 class="popup__title">Вы уверены?</h3>
+                    <button aria-label="Кнопка закрыть" class="popup__close-icon" type="button"></button>
+                        <button class="form__button form__button_delete" type="submit">Да</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <template id="template-card">
             <div class="card">
                 <img class="card__image">
                 <div class="card__text">
                     <h2 class="card__title"></h2>
-                    <button aria-label="Кнопка добавить" class="card__like" type="button"></button>
+                    <div class="card__likes">
+                    <button aria-label="Кнопка лайк" class="card__like" type="button"></button>
+                    <p class="card__like-count">2</p>
+                    </div>
                 </div>
                 <button class="card__trash" type="button" aria-label="Кнопка удалить"></button>
             </div>

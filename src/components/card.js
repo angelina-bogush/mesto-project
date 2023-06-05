@@ -33,16 +33,11 @@ const createCard = function (newCardObj) {
     const newCard = createCard(newCardObj);
     cardContainer.prepend(newCard);
   };
-  
-  contentCards.forEach((info) => {
-    addCard(info);
-  });
-    // добавление карточек на страницу пользователем 
-export function createCardFormSubmit(evt) {
-  evt.preventDefault();
+
+export function createCardFormSubmit(card) {
   const newCardObj = {
-    name: cardNameInput.value,
-    link: cardLinkInput.value,
+    name: card.name,
+    link: card.link,
   };
   addCard(newCardObj);
   closePopup(popupAddCard);

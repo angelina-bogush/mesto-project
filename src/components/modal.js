@@ -1,5 +1,5 @@
 import { closePopup } from "./utils";
-import { popups } from "./variables";
+import { popups, avatarLinkInput, profileAvatar, popupAvatar } from "./variables";
 //закрытие всех попапов
 export function closeAllPopups() {
   popups.forEach((popup) => {
@@ -16,3 +16,9 @@ popups.forEach((overlay) =>
     }
   })
 );
+
+export function editAvatar(evt){
+evt.preventDefault();
+profileAvatar.src = avatarLinkInput.value;
+closePopup(popupAvatar)
+}
