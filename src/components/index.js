@@ -20,7 +20,7 @@ import {
 import { enableValidation } from "./validate.js";
 import { createCardFormSubmit } from "./card";
 import { closePopup, disableButton, openPopup } from "./utils";
-import { getUserInfo, getCardsInfo, loadProfileInfo, postNewCard } from "./api";
+import { getUserInfo, getCardsInfo, loadProfileInfo, postNewCard, cardDataId } from "./api";
 import { editAvatar } from "./modal";
 
 buttonEdit.addEventListener("click", () => {
@@ -52,6 +52,7 @@ function submitProfileForm(evt) {
   profileSubtitle.textContent = formDescription.value;
   closePopup(popupEditProfile);
   disableButton(formSubmitButton);
+  loadProfileInfo();
 }
 formEdit.addEventListener("submit", submitProfileForm);
 formAdd.addEventListener("submit", postNewCard);
@@ -65,6 +66,7 @@ enableValidation({
   formInputError: "form__input_error",
   inactiveButtonClass: "form__button_inactive",
 });
-loadProfileInfo();
+// loadProfileInfo();
 getUserInfo();
 getCardsInfo();
+console.log(cardDataId)

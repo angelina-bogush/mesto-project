@@ -1,6 +1,6 @@
-import { profileTitle, profileSubtitle, profileAvatar, formInputName, cardLinkInput } from "./variables"
+import {formInputName, cardLinkInput, avatarLinkInput, formDescription, cardNameInput } from "./variables"
+import { deleteCard } from "./card"
 import { createCardFormSubmit } from "./card"
-import { closePopup } from "./utils"
 const congif = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25/',
     headers: {
@@ -8,23 +8,6 @@ const congif = {
         'Content-Type': 'application/json'
       }
 }
-// const user = {
-//     "name": profileTitle.textContent,
-//     "about": profileSubtitle.textContent,
-//     "avatar": profileAvatar.src,
-//     "_id": "469baa30-a404-4c2f-8acf-7186e9d2571a",
-//     "cohort": "cohort-25-plus"
-//   }
-// export const postUserInfo = () => {
-//    return fetch('https://nomoreparties.co/v1/plus-cohort-25/users/me', {
-//   method: 'POST',
-//   headers: {
-//     authorization: '469baa30-a404-4c2f-8acf-7186e9d2571a',
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify(user)
-// })
-// }
 
 export const getUserInfo = () => {
 return fetch ('https://nomoreparties.co/v1/plus-cohort-25/users/me', {
@@ -36,7 +19,8 @@ return fetch ('https://nomoreparties.co/v1/plus-cohort-25/users/me', {
 .then(data => {
     console.log(data)
 })}
-
+          // массив карточек с сервера
+export let cardDataId;
 export const getCardsInfo = () => {
     return fetch ('https://nomoreparties.co/v1/plus-cohort-25/cards', {
         headers: {
@@ -46,7 +30,7 @@ export const getCardsInfo = () => {
     .then(res => res.json())
     .then(data => {
         data.forEach((card) => {
-            createCardFormSubmit(card)
+            createCardFormSubmit(card);
         })
     })
     }
@@ -58,11 +42,15 @@ export const getCardsInfo = () => {
                 'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: profileTitle.textContent,
-            about: profileSubtitle.textContent
+            name: formInputName.value,
+            about: formDescription.value
         })
            })
-        }
+           .then(res => res.json())
+           .then(data => {
+        console.log(data)})
+        
+    }
 export const postNewCard = (evt) => {
     evt.preventDefault();
     return fetch ('https://nomoreparties.co/v1/plus-cohort-25/cards',{
@@ -72,12 +60,40 @@ export const postNewCard = (evt) => {
              'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: formInputName.value,
+            name: cardNameInput.value,
             link: cardLinkInput.value
         })
     })
     .then(res => res.json())
-    .then(data => {
+    .then((data) => {
          createCardFormSubmit(data)
+         console.log(data)
         })
+};
+export const postNewAvatar = () => {
+    return fetch ('https://nomoreparties.co/v1/plus-cohort-25/users/me/avatar', {
+        method: 'PATCH',
+        headers: {
+            authorization: '469baa30-a404-4c2f-8acf-7186e9d2571a',
+             'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            avatar: avatarLinkInput.value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+    })
 }
+
+
+// export const deleteCard = () => {
+//     const cardId =
+//     return fetch(`https://nomoreparties.co/v1/plus-cohort-25/cards/${cardsData._id}`, {
+//         method: 'DELETE',
+//         headers: {
+//             authorization: '469baa30-a404-4c2f-8acf-7186e9d2571a'
+//         }
+//     })
+// }

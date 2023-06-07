@@ -20,7 +20,8 @@
 @import url('../blocks/card/__image/card__image.css');
 @import url('../blocks/card/__like/card__like.css');
 @import url('../blocks/card/__like/_active/card__like_active.css');
-@import url('../blocks/card/__like-count/');
+@import url('../blocks/card/__like-count/card__like-count.css');
+@import url('../blocks/card/__likes/card__likes.css');
 @import url('../blocks/card/__trash/card__trash.css');
 @import url('../blocks/card/__text/card__text.css');
 @import url('../blocks/card/__title/card__title.css');
