@@ -1,16 +1,18 @@
 import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardLinkInput, cardNameInput, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
-import { contentCards } from './array.js';
 import {closePopup, openPopup, disableButton} from './utils.js';
+import { deleteCardOnServer} from './api.js';
 
-export function deleteCard(evt) {
-  const cardToDelete = evt.target.closest('.card');
-  cardToDelete.remove();                           
-}
 function addClassLike(evt) {
   const eventTarget = evt.target;
   eventTarget.classList.toggle("card__like_active")}
 
-const createCard = function (newCardObj) {
+ function deleteCard(event, cardId) {
+    deleteCardOnServer(cardId);
+    const cardToDelete = event.target.closest('.card');
+    cardToDelete.remove();                           
+  }
+
+const createCard = function (newCardObj, card) {
     const newCard = cardTemplate.querySelector(".card").cloneNode(true); 
     const newCardName = newCard.querySelector(".card__title"); 
     const newCardImage = newCard.querySelector(".card__image"); 
@@ -22,6 +24,8 @@ const createCard = function (newCardObj) {
     const ownerId = newCardObj['ownerId'];
     if (ownerId !== 'aa85ec022edf5336fad5607c'){
       buttonTrash.style.display = 'none'
+    } else {
+      buttonTrash.setAttribute('card-id', card._id); // добавила атрибут id карточки
     }
     const cardImage = newCard.querySelector(".card__image");
     const clickCard = function(){                // открытие попапа картинки
@@ -32,11 +36,13 @@ const createCard = function (newCardObj) {
   };
     cardImage.addEventListener("click", clickCard);
     cardLike.addEventListener('click', addClassLike);
-    buttonTrash.addEventListener("click", deleteCard)
+    buttonTrash.addEventListener("click", function(event){
+      const cardId = event.target.getAttribute('card-id');
+      deleteCard(event, cardId)})
     return newCard;
   };
-  const addCard = function (newCardObj) {
-    const newCard = createCard(newCardObj);
+  const addCard = function (newCardObj, card) {
+    const newCard = createCard(newCardObj, card);
     cardContainer.prepend(newCard);
   };
 
@@ -46,7 +52,7 @@ export function createCardFormSubmit(card) {
     link: card.link,
     ownerId: card.owner._id
   };
-  addCard(newCardObj);
+  addCard(newCardObj, card);
   closePopup(popupAddCard);
   formAdd.reset();
   disableButton(formCreateButton)

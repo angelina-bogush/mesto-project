@@ -69,4 +69,3 @@ enableValidation({
 // loadProfileInfo();
 getUserInfo();
 getCardsInfo();
-console.log(cardDataId)

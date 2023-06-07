@@ -1,5 +1,4 @@
 import {formInputName, cardLinkInput, avatarLinkInput, formDescription, cardNameInput } from "./variables"
-import { deleteCard } from "./card"
 import { createCardFormSubmit } from "./card"
 const congif = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25/',
@@ -86,14 +85,14 @@ export const postNewAvatar = () => {
         console.log(data)
     })
 }
+export const deleteCardOnServer = (cardId) => {
+    return fetch(`https://nomoreparties.co/v1/plus-cohort-25/cards/${cardId}`, {
+        method: 'DELETE',
+        headers: {
+            authorization: '469baa30-a404-4c2f-8acf-7186e9d2571a'
+        }
+    })
+}
 
 
-// export const deleteCard = () => {
-//     const cardId =
-//     return fetch(`https://nomoreparties.co/v1/plus-cohort-25/cards/${cardsData._id}`, {
-//         method: 'DELETE',
-//         headers: {
-//             authorization: '469baa30-a404-4c2f-8acf-7186e9d2571a'
-//         }
-//     })
-// }
+
