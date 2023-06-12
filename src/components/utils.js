@@ -1,3 +1,4 @@
+
 const handleCloseEscape = (event) => {
   if (event.key === "Escape") {
     const openedPopup =  document.querySelector('.popup_opened');
@@ -16,3 +17,16 @@ export function closePopup(popupName) {
     popupName.classList.remove("popup_opened");
     document.removeEventListener("keydown", handleCloseEscape)
   }
+// export function changeLoading(button, isLoading, loadingText = 'Сохранить', buttonText = 'Сохранение...'){
+//   if(isLoading) {
+//     button.textContent = loadingText
+// } else {
+//     button.textContent = buttonText
+// }
+// }
+export function changeLoadingButton(button, loadingText="Сохранение..."){
+  button.textContent = loadingText
+}
+export function changeSaveButton(button, buttonText = 'Сохранить'){
+  button.textContent = buttonText
+}

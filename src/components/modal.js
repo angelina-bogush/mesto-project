@@ -1,5 +1,5 @@
-import { closePopup } from "./utils";
-import { popups, avatarLinkInput, profileAvatar, popupAvatar, formAvatar } from "./variables";
+import { closePopup, changeLoadingButton, changeSaveButton } from "./utils";
+import { popups, avatarLinkInput, profileAvatar, popupAvatar, formAvatar, buttonSaveAvatar } from "./variables";
 import { postNewAvatar } from "./api";
 //закрытие всех попапов
 export function closeAllPopups() {
@@ -18,10 +18,17 @@ popups.forEach((overlay) =>
   })
 );
 
-export function editAvatar(evt){
-evt.preventDefault();
-profileAvatar.src = avatarLinkInput.value;
-postNewAvatar();
-closePopup(popupAvatar);
-formAvatar.reset()
+export function submitAvatarForm(evt, loadingText='Сохранение...', buttonText='Сохранить'){
+  evt.preventDefault();
+  changeLoadingButton(buttonSaveAvatar, loadingText);
+  postNewAvatar()
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  changeSaveButton(buttonSaveAvatar, buttonText);
+  closePopup(popupAvatar);
+  formAvatar.reset();
 }
