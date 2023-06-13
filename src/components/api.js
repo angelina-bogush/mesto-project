@@ -5,7 +5,6 @@ import {
   formDescription,
   cardNameInput,
 } from "./variables";
-import { createCardFormSubmit } from "./card";
 
 const config = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-25",
@@ -14,7 +13,7 @@ const config = {
     "Content-Type": "application/json",
   },
 };
-export const myUserId = "aa85ec022edf5336fad5607c";
+// export const myUserId = "aa85ec022edf5336fad5607c";
 
 const checkAnswer = (res) => {
     if (res.ok) {
@@ -29,9 +28,6 @@ export const getUserInfo = () => {
     headers: config.headers,
   })
   .then(checkAnswer)
-  .catch((err) => {
-    console.log(err)
-  })
 };
 //загрузка карточек с сервера
 export const getCardsInfo = () => {
@@ -82,9 +78,6 @@ export const deleteCardOnServer = (cardId) => {
     headers: config.headers,
   })
   .then(checkAnswer)
-  .catch((err) => {
-    console.log(err)
-  })
 };
 //добавление лайка
 export const addLikeCard = (cardId) => {
@@ -93,9 +86,6 @@ export const addLikeCard = (cardId) => {
     headers: config.headers,
   })
   .then(checkAnswer)
-  .catch((err) => {
-    console.log(err)
-  })
 };
 //удаление лайка
 export const deleteLikeCard = (cardId) => {
@@ -104,8 +94,5 @@ export const deleteLikeCard = (cardId) => {
     headers: config.headers,
   })
   .then(checkAnswer)
-  .catch((err) => {
-    console.log(err)
-  })
 };
 

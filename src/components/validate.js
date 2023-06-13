@@ -31,11 +31,16 @@ const hasInvalidInput = (inputList) => {
     return !inputElement.validity.valid;
   });
 };
+//выключенная кнопка
+export const disableButton = (buttonElement) => {
+  buttonElement.disabled = true;
+  buttonElement.classList.add('form__button_inactive');
+}
+
 //функция переключения кнопки формы
 const toggleFormButton = (inputList, buttonElement, data) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-    buttonElement.classList.add(data.inactiveButtonClass);
+    disableButton(buttonElement)
   } else {
     buttonElement.disabled = false;
     buttonElement.classList.remove(data.inactiveButtonClass);

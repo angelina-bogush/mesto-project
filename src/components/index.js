@@ -12,18 +12,18 @@ import {
   profileTitle,
   formEdit,
   formSubmitButton,
+  formCreateButton,
+  buttonSaveAvatar,
   buttonAvatar,
   popupAvatar,
  formAvatar,
- buttonSaveNewCard,
- buttonSaveEdit,
  profileAvatar
 } from "./variables";
 import { enableValidation } from "./validate.js";
-import { closePopup, disableButton, openPopup, changeSaveButton, changeLoadingButton} from "./utils";
-import { getUserInfo, getCardsInfo, loadProfileInfo, postNewCard } from "./api";
-import { submitAvatarForm } from "./modal";
+import { closePopup, openPopup, changeLoading} from "./utils";
+import { getUserInfo, getCardsInfo, loadProfileInfo, postNewCard, postNewAvatar } from "./api";
 import { createCardFormSubmit } from "./card";
+import { disableButton } from "./validate.js";
 
 enableValidation({
   formSelector: ".form",
@@ -33,15 +33,16 @@ enableValidation({
   formInputError: "form__input_error",
   inactiveButtonClass: "form__button_inactive",
 });
-
 //инфо о пользователе и вывод карточек с сервера
 Promise.all([getUserInfo(), getCardsInfo()])
 .then(([userInfo, cards]) => {
   profileTitle.textContent = userInfo.name;
   profileSubtitle.textContent = userInfo.about;
   profileAvatar.src = userInfo.avatar;
+  const myUserId = userInfo._id;
   cards.forEach((card) => {
-        createCardFormSubmit(card)})
+        const userId = card.owner._id;
+        createCardFormSubmit(card, myUserId, userId)})
 })
 .catch((err) => {
   console.log(err)
@@ -56,37 +57,58 @@ popupClosingIcon.forEach((icon) =>
 );
 
 //изменение имени в форме редактирования профиля
-function submitProfileForm(evt,loadingText = 'Сохранение...', buttonText = 'Сохранить') {
+function submitProfileForm(evt) {
   evt.preventDefault();
-  changeLoadingButton(buttonSaveEdit, loadingText)
+  const buttonText = formSubmitButton.textContent;
+  changeLoading(formSubmitButton, true, buttonText);
   loadProfileInfo()
     .then((profile) => {
       profileTitle.textContent = profile.name;
       profileSubtitle.textContent = profile.about;
+      // changeLoading(formSubmitButton, true, loadingText, buttonText)
+      closePopup(popupEditProfile);
+      disableButton(formSubmitButton);
     })
     .catch((err) => {
       console.log(err)
     })
-  closePopup(popupEditProfile);
-  disableButton(formSubmitButton);
-  changeSaveButton(buttonSaveEdit, buttonText)
+    .finally(() => {
+      changeLoading(formSubmitButton, false, buttonText)
+    })
 }
 //пост новой карточки на сервер
-function submitNewCardForm(
-  evt,
-  loadingText = "Сохранение...",
-  buttonText = "Создать"
-) {
+function submitNewCardForm(evt) {
   evt.preventDefault();
-  changeLoadingButton(buttonSaveNewCard, loadingText);
+  const buttonText = formCreateButton.textContent;
+  changeLoading(formCreateButton, true, buttonText);
   postNewCard()
     .then((data) => {
       createCardFormSubmit(data);
     })
     .catch((err) => {
       console.log(err);
-    });
-  changeSaveButton(buttonSaveNewCard, buttonText);
+    })
+    .finally(() => {
+      changeLoading(formCreateButton, false, buttonText)
+    })
+}
+//добавление нового аватара
+ function submitAvatarForm(evt){
+  const buttonText = buttonSaveAvatar.textContent;
+  changeLoading(buttonSaveAvatar, true, buttonText);
+  evt.preventDefault();
+  postNewAvatar()
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+      closePopup(popupAvatar);
+      formAvatar.reset();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      changeLoading(buttonSaveAvatar, false, buttonText)
+    })
 }
 buttonEdit.addEventListener("click", () => {
   formInputName.value = profileTitle.textContent;

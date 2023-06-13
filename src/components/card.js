@@ -1,32 +1,43 @@
 import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
-import {closePopup, openPopup, disableButton} from './utils.js';
-import { deleteCardOnServer, addLikeCard, myUserId, deleteLikeCard} from './api.js';
+import {closePopup, openPopup} from './utils.js';
+import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo} from './api.js';
+import { disableButton } from './validate.js';
 
 function addClassLike(event, cardId) {
-  event.target.classList.add("card__like_active");
   addLikeCard(cardId)
    .then((data) => {
+    event.target.classList.add("card__like_active");
     const cardLikes = event.target.closest('.card').querySelector('.card__like-count');
     cardLikes.textContent =  data.likes.length;
    })
+   .catch((err) => {
+    console.log(err)
+  })
 }
 
  function removeClassLike(event, cardId) {
-  event.target.classList.remove("card__like_active");
   deleteLikeCard(cardId)
   .then((data) => {
+    event.target.classList.remove("card__like_active");
     const cardLikes = event.target.closest('.card').querySelector('.card__like-count');
     cardLikes.textContent = data.likes.length;
+  })
+  .catch((err) => {
+    console.log(err)
   })
 }
 
  function deleteCard(event, cardId) {
-    deleteCardOnServer(cardId, event);
-    const cardToDelete = event.target.closest('.card');
-    cardToDelete.remove();                           
+    deleteCardOnServer(cardId)
+    .then(() => {
+    event.target.closest('.card').remove();
+    })  
+    .catch((err) => {
+      console.log(err)
+    })                         
   }
 
-const createCard = function (newCardObj, card) {
+const createCard = function (newCardObj, card, myUserId, userId) {
     const newCard = cardTemplate.querySelector(".card").cloneNode(true); 
     const newCardName = newCard.querySelector(".card__title"); 
     const newCardImage = newCard.querySelector(".card__image"); 
@@ -38,12 +49,11 @@ const createCard = function (newCardObj, card) {
     const cardLikeCount = newCard.querySelector('.card__like-count');
     cardLikeCount.textContent = card.likes.length;
     const buttonTrash = newCard.querySelector(".card__trash");
-    const ownerId = newCardObj['ownerId'];
-    if (ownerId !== myUserId){
+    if (userId !== myUserId){
       buttonTrash.style.display = 'none'
     } else {
       buttonTrash.setAttribute('card-id', card._id); // добавила атрибут id карточки
-    }
+    } 
     cardLike.setAttribute('cardLike-id', card._id);
     const clickCard = function(){                // открытие попапа картинки
     popupPhotoImage.src = newCardObj['link'];
@@ -63,19 +73,18 @@ const createCard = function (newCardObj, card) {
       deleteCard(event, cardId)})
     return newCard;
   };
-  const addCard = function (newCardObj, card) {
-    const newCard = createCard(newCardObj, card);
+  const addCard = function (newCardObj, card, myUserId, userId) {
+    const newCard = createCard(newCardObj, card, myUserId, userId);
     cardContainer.prepend(newCard);
   };
 
-export function createCardFormSubmit(card) {
+export function createCardFormSubmit(card, myUserId, userId) {
   const newCardObj = {
     name: card.name,
     link: card.link,
-    ownerId: card.owner._id,
     likes: card.likes.length
   };
-  addCard(newCardObj, card);
+  addCard(newCardObj, card, myUserId, userId);
   closePopup(popupAddCard);
   formAdd.reset();
   disableButton(formCreateButton)
