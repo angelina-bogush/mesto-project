@@ -13,7 +13,6 @@ const config = {
     "Content-Type": "application/json",
   },
 };
-// export const myUserId = "aa85ec022edf5336fad5607c";
 
 const checkAnswer = (res) => {
     if (res.ok) {

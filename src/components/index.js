@@ -102,6 +102,7 @@ function submitNewCardForm(evt) {
       profileAvatar.src = data.avatar;
       closePopup(popupAvatar);
       formAvatar.reset();
+      disableButton(buttonSaveAvatar)
     })
     .catch((err) => {
       console.log(err);

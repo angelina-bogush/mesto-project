@@ -8,12 +8,14 @@ export function closeAllPopups() {
     }
   });
 }
-//закрытие попапов на оверлей
-popups.forEach((overlay) =>
-  overlay.addEventListener("click", (evt) => {
-    if (evt.target.classList.contains("popup_opened")) {
-      closePopup(overlay);
+export const handleCloseEscape = (event) => {
+  if (event.key === "Escape") {
+    const openedPopup =  document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  } }
+export function closePopupOverlay(evt){
+    if(evt.target.classList.contains('popup_opened')){
+      closePopup(evt.target)
     }
-  })
-);
+    }
 
