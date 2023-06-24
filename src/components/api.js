@@ -7,13 +7,6 @@ import {
   cardNameInput,
 } from "./variables";
 
-// const config = {
-//   baseUrl: "https://nomoreparties.co/v1/plus-cohort-25",
-//   headers: {
-//     authorization: "469baa30-a404-4c2f-8acf-7186e9d2571a",
-//     "Content-Type": "application/json",
-//   },
-// };
 export default class Api {
   constructor({baseUrl, headers}){
     this._url = baseUrl;
@@ -35,7 +28,7 @@ getUserInfo(){
 //загрузка карточек с сервера
 getCardsInfo(){
   return fetch(`${this._url}/cards`, {
-    headers: config.headers,
+    headers: this._headers,
   })
     .then(this._checkAnswer)
 };
@@ -43,7 +36,7 @@ getCardsInfo(){
 loadProfileInfo(){
   return fetch(`${this._url}/users/me`, {
     method: "PATCH",
-    headers: config.headers,
+    headers: this._headers,
     body: JSON.stringify({
       name: formInputName.value,
       about: formDescription.value,
@@ -55,7 +48,7 @@ loadProfileInfo(){
 postNewCard(){
   return fetch(`${this._url}/cards`, {
     method: "POST",
-    headers: config.headers,
+    headers: this._headers,
     body: JSON.stringify({
       name: cardNameInput.value,
       link: cardLinkInput.value,
@@ -67,7 +60,7 @@ postNewCard(){
 postNewAvatar(){
   return fetch(`${this._url}/users/me/avatar`, {
     method: "PATCH",
-    headers: config.headers,
+    headers: this._headers,
     body: JSON.stringify({
       avatar: avatarLinkInput.value,
     }),
@@ -78,7 +71,7 @@ postNewAvatar(){
 deleteCardOnServer(cardId){
   return fetch(`${this._url}/cards/${cardId}`, {
     method: "DELETE",
-    headers: config.headers,
+    headers: this._headers,
   })
   .then(this._checkAnswer)
 };
@@ -86,7 +79,7 @@ deleteCardOnServer(cardId){
 addLikeCard(cardId){
   return fetch(`${this._url}/cards/likes/${cardId}`, {
     method: "PUT",
-    headers: config.headers,
+    headers: this._headers,
   })
   .then(this._checkAnswer)
 };
@@ -94,8 +87,11 @@ addLikeCard(cardId){
 deleteLikeCard(cardId){
   return fetch(`${this._url}/cards/likes/${cardId}`, {
     method: "DELETE",
-    headers: config.headers,
+    headers: this._headers,
   })
   .then(this._checkAnswer)
 };
+//отображение всей информации
+getInfo(){
+  return Promise.all([this.getUserInfo(), this.getCardsInfo()])};
 }

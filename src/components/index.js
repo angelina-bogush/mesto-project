@@ -37,7 +37,7 @@ enableValidation({
   inactiveButtonClass: "form__button_inactive",
 });
 //инфо о пользователе и вывод карточек с сервера
-Promise.all([getUserInfo(), getCardsInfo()])
+api.getInfo()
 .then(([userInfo, cards]) => {
   profileTitle.textContent = userInfo.name;
   profileSubtitle.textContent = userInfo.about;
