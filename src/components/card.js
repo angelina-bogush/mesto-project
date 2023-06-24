@@ -1,10 +1,10 @@
 import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
 import {closePopup, openPopup} from './utils.js';
-import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo} from './api.js';
+import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo, Api} from './api.js';
 import { disableButton } from './validate.js';
 
-function addClassLike(event, cardId) {
-  addLikeCard(cardId)
+function addClassLike(event, cardId, Api) {
+  Api.addLikeCard(cardId)
    .then((data) => {
     event.target.classList.add("card__like_active");
     const cardLikes = event.target.closest('.card').querySelector('.card__like-count');
@@ -15,8 +15,8 @@ function addClassLike(event, cardId) {
   })
 }
 
- function removeClassLike(event, cardId) {
-  deleteLikeCard(cardId)
+ function removeClassLike(event, cardId, Api) {
+  Api.deleteLikeCard(cardId)
   .then((data) => {
     event.target.classList.remove("card__like_active");
     const cardLikes = event.target.closest('.card').querySelector('.card__like-count');
@@ -27,8 +27,8 @@ function addClassLike(event, cardId) {
   })
 }
 
- function deleteCard(event, cardId) {
-    deleteCardOnServer(cardId)
+ function deleteCard(event, cardId, Api) {
+    Api.deleteCardOnServer(cardId)
     .then(() => {
     event.target.closest('.card').remove();
     })  

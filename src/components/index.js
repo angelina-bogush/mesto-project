@@ -21,9 +21,12 @@ import {
 } from "./variables";
 import { enableValidation } from "./validate.js";
 import { closePopup, openPopup, changeLoading} from "./utils";
-import { getUserInfo, getCardsInfo, loadProfileInfo, postNewCard, postNewAvatar } from "./api";
+import  Api from "./api.js";
 import { createCardFormSubmit } from "./card";
 import { disableButton } from "./validate.js";
+import {config} from './data'
+
+const api = new Api(config)
 
 enableValidation({
   formSelector: ".form",
