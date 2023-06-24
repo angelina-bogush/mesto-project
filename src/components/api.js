@@ -1,3 +1,4 @@
+
 import {
   formInputName,
   cardLinkInput,
@@ -6,38 +7,41 @@ import {
   cardNameInput,
 } from "./variables";
 
-const config = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-25",
-  headers: {
-    authorization: "469baa30-a404-4c2f-8acf-7186e9d2571a",
-    "Content-Type": "application/json",
-  },
-};
-
-const checkAnswer = (res) => {
+// const config = {
+//   baseUrl: "https://nomoreparties.co/v1/plus-cohort-25",
+//   headers: {
+//     authorization: "469baa30-a404-4c2f-8acf-7186e9d2571a",
+//     "Content-Type": "application/json",
+//   },
+// };
+export default class Api {
+  constructor({baseUrl, headers}){
+    this._url = baseUrl;
+    this._headers = headers
+  }
+ _checkAnswer(res){
     if (res.ok) {
       return res.json();
     } else {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
   };
-
-export const getUserInfo = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
+getUserInfo(){
+  return fetch(`${this._url}/users/me`, {
+    headers: this._headers,
   })
-  .then(checkAnswer)
+  .then(this._checkAnswer)
 };
 //загрузка карточек с сервера
-export const getCardsInfo = () => {
-  return fetch(`${config.baseUrl}/cards`, {
+getCardsInfo(){
+  return fetch(`${this._url}/cards`, {
     headers: config.headers,
   })
-    .then(checkAnswer)
+    .then(this._checkAnswer)
 };
 //инфо о пользователе
-export const loadProfileInfo = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
+loadProfileInfo(){
+  return fetch(`${this._url}/users/me`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
@@ -45,11 +49,11 @@ export const loadProfileInfo = () => {
       about: formDescription.value,
     }),
   })
-  .then(checkAnswer);
+  .then(this._checkAnswer);
 };
 //пост новой карточки
-export const postNewCard = () => {
-  return fetch(`${config.baseUrl}/cards`, {
+postNewCard(){
+  return fetch(`${this._url}/cards`, {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify({
@@ -57,41 +61,41 @@ export const postNewCard = () => {
       link: cardLinkInput.value,
     }),
   })
-    .then(checkAnswer)
+    .then(this._checkAnswer)
 };
 //новый аватар
-export const postNewAvatar = () => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
+postNewAvatar(){
+  return fetch(`${this._url}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       avatar: avatarLinkInput.value,
     }),
   })
-  .then(checkAnswer);
+  .then(this._checkAnswer);
 };
 //удаление карточки
-export const deleteCardOnServer = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+deleteCardOnServer(cardId){
+  return fetch(`${this._url}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   })
-  .then(checkAnswer)
+  .then(this._checkAnswer)
 };
 //добавление лайка
-export const addLikeCard = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+addLikeCard(cardId){
+  return fetch(`${this._url}/cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
   })
-  .then(checkAnswer)
+  .then(this._checkAnswer)
 };
 //удаление лайка
-export const deleteLikeCard = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+deleteLikeCard(cardId){
+  return fetch(`${this._url}/cards/likes/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   })
-  .then(checkAnswer)
+  .then(this._checkAnswer)
 };
-
+}
