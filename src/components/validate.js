@@ -1,3 +1,9 @@
+export class Validator {
+  
+}
+
+
+
 //показать и скрыть ошибку формы
 function showInputError(formElement, inputElement, errorMessage, data) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
