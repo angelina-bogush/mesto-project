@@ -1,5 +1,5 @@
 import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
-import {closePopup, openPopup} from './utils.js';
+import {closePopup, openPopup} from './modal.js';
 import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo, Api} from './api.js';
 import { FormValidator } from './validate.js';
 

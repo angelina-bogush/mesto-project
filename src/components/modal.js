@@ -1,5 +1,18 @@
-import { closePopup} from "./utils";
+import {  } from "./utils";
 import { popups } from "./variables";
+
+export function openPopup(popupName) {
+  popupName.classList.add("popup_opened");
+  document.addEventListener("keydown",handleCloseEscape);
+  document.addEventListener('click', closePopupOverlay)
+}
+
+export function closePopup(popupName) {
+  popupName.classList.remove("popup_opened");
+  document.removeEventListener("keydown", handleCloseEscape)
+}
+
+
 //закрытие всех попапов
 export function closeAllPopups() {
   popups.forEach((popup) => {

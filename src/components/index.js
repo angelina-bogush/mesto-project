@@ -21,7 +21,8 @@ import {
  validationConfig
 } from "./variables";
 import { enableValidation } from "./validate.js";
-import { closePopup, openPopup, changeLoading} from "./utils";
+import { changeLoading } from "./utils";
+import { closePopup, openPopup } from "./modal"
 import  Api from "./api.js";
 import { createCardFormSubmit } from "./card";
 import { disableButton } from "./validate.js";
@@ -145,7 +146,6 @@ buttonAvatar.addEventListener('click', () => {
 // formEdit.addEventListener("submit", submitProfileForm);
 // formAdd.addEventListener("submit", submitNewCardForm);
 // formAvatar.addEventListener('submit', submitAvatarForm);
-
 
 newPostValidation.enableValidation();
 editAvatarValidation.enableValidation();
