@@ -20,14 +20,17 @@ import {
  profileAvatar,
  validationConfig
 } from "./variables";
-import { enableValidation } from "./validate.js";
+import { enableValidation } from "./FormValidator.js";
 import { changeLoading } from "./utils";
-import { closePopup, openPopup } from "./modal"
+import { Popup } from "./Popup"
 import  Api from "./api.js";
 import { createCardFormSubmit } from "./card";
-import { disableButton } from "./validate.js";
+import { disableButton } from "./FormValidator.js";
 import {config} from './data'
-import { FormValidator } from "./validate.js"
+import { FormValidator } from "./FormValidator.js"
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+
 
 const editProfileValidation = new FormValidator(validationConfig, formEdit);
 const editAvatarValidation = new FormValidator(validationConfig, formAvatar);

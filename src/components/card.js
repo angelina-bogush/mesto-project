@@ -1,7 +1,10 @@
 import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
-import {closePopup, openPopup} from './modal.js';
+import { Popup } from './Popup.js';
 import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo, Api} from './api.js';
-import { FormValidator } from './validate.js';
+import { FormValidator } from './FormValidator.js';
+
+
+
 
 function addClassLike(event, cardId, Api) {
   Api.addLikeCard(cardId)
@@ -55,12 +58,12 @@ const createCard = function (newCardObj, card, myUserId, userId) {
       buttonTrash.setAttribute('card-id', card._id); // добавила атрибут id карточки
     } 
     cardLike.setAttribute('cardLike-id', card._id);
-    const clickCard = function(){                // открытие попапа картинки
-    popupPhotoImage.src = newCardObj['link'];
-    popupPhotoImage.alt = newCardObj['name'];
-    popupPhotoDescription.textContent = newCardObj['name'];
-    openPopup(popupPhoto);
-  };
+  //   const clickCard = function(){                // открытие попапа картинки
+  //   popupPhotoImage.src = newCardObj['link'];
+  //   popupPhotoImage.alt = newCardObj['name'];
+  //   popupPhotoDescription.textContent = newCardObj['name'];
+  //   openPopup(popupPhoto);
+  // };
     cardImage.addEventListener("click", clickCard);
     cardLike.addEventListener('click', function(event){
       const cardId = event.target.getAttribute('cardLike-id');
