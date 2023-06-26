@@ -17,7 +17,8 @@ import {
   buttonAvatar,
   popupAvatar,
  formAvatar,
- profileAvatar
+ profileAvatar,
+ validationConfig
 } from "./variables";
 import { enableValidation } from "./validate.js";
 import { closePopup, openPopup, changeLoading} from "./utils";
@@ -25,17 +26,21 @@ import  Api from "./api.js";
 import { createCardFormSubmit } from "./card";
 import { disableButton } from "./validate.js";
 import {config} from './data'
+import { FormValidator } from "./validate.js"
 
+const editProfileValidation = new FormValidator(validationConfig, formEdit);
+const editAvatarValidation = new FormValidator(validationConfig, formAvatar);
+const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config)
 
-enableValidation({
-  formSelector: ".form",
-  formInput: ".form__input",
-  buttonSelector: ".form__button",
-  formErrorTheme: "form__input_theme_error",
-  formInputError: "form__input_error",
-  inactiveButtonClass: "form__button_inactive",
-});
+// enableValidation({
+//   formSelector: ".form",
+//   formInput: ".form__input",
+//   buttonSelector: ".form__button",
+//   formErrorTheme: "form__input_theme_error",
+//   formInputError: "form__input_error",
+//   inactiveButtonClass: "form__button_inactive",
+// });
 //инфо о пользователе и вывод карточек с сервера
 api.getInfo()
 .then(([userInfo, cards]) => {
@@ -70,7 +75,8 @@ function submitProfileForm(evt) {
       profileSubtitle.textContent = profile.about;
       // changeLoading(formSubmitButton, true, loadingText, buttonText)
       closePopup(popupEditProfile);
-      disableButton(formSubmitButton);
+
+      // disableButton(formSubmitButton);
     })
     .catch((err) => {
       console.log(err)
@@ -105,7 +111,8 @@ function submitNewCardForm(evt) {
       profileAvatar.src = data.avatar;
       closePopup(popupAvatar);
       formAvatar.reset();
-      disableButton(buttonSaveAvatar)
+
+      // disableButton(buttonSaveAvatar)
     })
     .catch((err) => {
       console.log(err);
@@ -118,15 +125,28 @@ buttonEdit.addEventListener("click", () => {
   formInputName.value = profileTitle.textContent;
   formDescription.value = profileSubtitle.textContent;
   openPopup(popupEditProfile, formSubmitButton);
+  editProfileValidation.disableButton();
+  editProfileValidation.hideError();
 });
+
+
 buttonAdd.addEventListener("click", () => {
   openPopup(popupAddCard);
+  newPostValidation.hideError();
+  newPostValidation.disableButton();
 });
 
 buttonAvatar.addEventListener('click', () => {
   openPopup(popupAvatar)
+  editAvatarValidation.disableButton();
+  editAvatarValidation.hideError();
 })
 
-formEdit.addEventListener("submit", submitProfileForm);
-formAdd.addEventListener("submit", submitNewCardForm);
-formAvatar.addEventListener('submit', submitAvatarForm);
+// formEdit.addEventListener("submit", submitProfileForm);
+// formAdd.addEventListener("submit", submitNewCardForm);
+// formAvatar.addEventListener('submit', submitAvatarForm);
+
+
+newPostValidation.enableValidation();
+editAvatarValidation.enableValidation();
+editProfileValidation.enableValidation();

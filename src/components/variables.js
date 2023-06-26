@@ -31,4 +31,11 @@ export const buttonSaveEdit = page.querySelector('.form__button_submit');
 // export const buttonSaveNewCard = page.querySelector('.form__button_create');
 export const buttonSaveAvatar = page.querySelector('.form__button_avatar');
 
-
+export const validationConfig = {
+  formSelector: ".form",
+  formInput: ".form__input",
+  buttonSelector: ".form__button",
+  formErrorTheme: "form__input_theme_error",
+  formInputError: "form__input_error",
+  inactiveButtonClass: "form__button_inactive",
+};

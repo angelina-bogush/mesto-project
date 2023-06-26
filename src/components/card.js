@@ -1,7 +1,7 @@
 import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
 import {closePopup, openPopup} from './utils.js';
 import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo, Api} from './api.js';
-import { disableButton } from './validate.js';
+import { FormValidator } from './validate.js';
 
 function addClassLike(event, cardId, Api) {
   Api.addLikeCard(cardId)
@@ -87,5 +87,7 @@ export function createCardFormSubmit(card, myUserId, userId) {
   addCard(newCardObj, card, myUserId, userId);
   closePopup(popupAddCard);
   formAdd.reset();
-  disableButton(formCreateButton)
+  
+  
+  // disableButton(formCreateButton)
 }
