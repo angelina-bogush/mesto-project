@@ -23,13 +23,13 @@ import {
 import { enableValidation } from "./FormValidator.js";
 import { changeLoading } from "./utils";
 import { Popup } from "./Popup"
-import  Api from "./api.js";
+import  Api from "./Api.js";
 import { createCardFormSubmit } from "./card";
 import { disableButton } from "./FormValidator.js";
 import {config} from './data'
 import { FormValidator } from "./FormValidator.js"
-import PopupWithForm from "../components/PopupWithForm.js";
-import PopupWithImage from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 
 
 const editProfileValidation = new FormValidator(validationConfig, formEdit);
@@ -73,7 +73,7 @@ function submitProfileForm(evt) {
   evt.preventDefault();
   const buttonText = formSubmitButton.textContent;
   changeLoading(formSubmitButton, true, buttonText);
-  loadProfileInfo()
+  api.loadProfileInfo()
     .then((profile) => {
       profileTitle.textContent = profile.name;
       profileSubtitle.textContent = profile.about;
@@ -94,7 +94,7 @@ function submitNewCardForm(evt) {
   evt.preventDefault();
   const buttonText = formCreateButton.textContent;
   changeLoading(formCreateButton, true, buttonText);
-  postNewCard()
+  api.postNewCard()
     .then((data) => {
       createCardFormSubmit(data);
     })
@@ -110,7 +110,7 @@ function submitNewCardForm(evt) {
   const buttonText = buttonSaveAvatar.textContent;
   changeLoading(buttonSaveAvatar, true, buttonText);
   evt.preventDefault();
-  postNewAvatar()
+  api.postNewAvatar()
     .then((data) => {
       profileAvatar.src = data.avatar;
       closePopup(popupAvatar);
