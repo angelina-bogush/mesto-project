@@ -1,4 +1,4 @@
-import { popups } from "./variables";
+
 
 export default class Popup {
   constructor(popupSelector) {
