@@ -38,14 +38,6 @@ const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config)
 const userInfo = new UserInfo(profileInfo);
 
-// enableValidation({
-//   formSelector: ".form",
-//   formInput: ".form__input",
-//   buttonSelector: ".form__button",
-//   formErrorTheme: "form__input_theme_error",
-//   formInputError: "form__input_error",
-//   inactiveButtonClass: "form__button_inactive",
-// });
 //инфо о пользователе и вывод карточек с сервера
 api.getInfo()
 .then(([userData, cards]) => {
@@ -63,49 +55,41 @@ api.getInfo()
   console.log(err)
 })
 
-//закрытие всех попапов на крестик
-popupClosingIcon.forEach((icon) =>
-  icon.addEventListener("click", () => {
-    const iconsPopup = icon.closest(".popup");
-    closePopup(iconsPopup);
-  })
-);
+// закрытие всех попапов на крестик
+// popupClosingIcon.forEach((icon) =>
+//   icon.addEventListener("click", () => {
+//     const iconsPopup = icon.closest(".popup");
+//     closePopup(iconsPopup);
+//   })
+// );
 
 //изменение имени в форме редактирования профиля
-// function submitProfileForm(evt) {
-//   evt.preventDefault();
 const changeUserInfo = new PopupWithForm({
   popupSelector: ".popup_theme_edit",
   handleFormSubmit: (inputValue) => {
     changeUserInfo.renderLoading(true);
   api.loadProfileInfo({ name: inputValue.formInputName, about: inputValue.formDescription })
     .then((profile) => {
-      //Продолжение от сюда 
-      profileTitle.textContent = profile.name;
-      profileSubtitle.textContent = profile.about;
-      // changeLoading(formSubmitButton, true, loadingText, buttonText)
-      closePopup(popupEditProfile);
-
-      // disableButton(formSubmitButton);
+      userInfo.setUserInfo({ name: profile.name, about: profile.about });
+      changeUserInfo.close();
     })
     .catch((err) => {
       console.log(err)
     })
     .finally(() => {
-      changeLoading(formSubmitButton, false, buttonText)
+      changeUserInfo.renderLoading(false);
     })
 }
 })
 
-
 //пост новой карточки на сервер
-function submitNewCardForm(evt) {
-  evt.preventDefault();
-  const buttonText = formCreateButton.textContent;
-  changeLoading(formCreateButton, true, buttonText);
-  api.postNewCard()
+const submitNewCardForm = new PopupWithForm() ({
+  popupSelector: ".popup_theme_add-card",
+  handleFormSubmit: (inputValue) => {
+  submitNewCardForm.renderLoading(true);
+  api.postNewCard({ name: inputValue.cardNameInput, link: inputValue.cardLinkInput })
     .then((data) => {
-      createCardFormSubmit(data);
+      //НАДО ДОБИТЬ ТУТ!!!!!
     })
     .catch((err) => {
       console.log(err);
@@ -113,27 +97,28 @@ function submitNewCardForm(evt) {
     .finally(() => {
       changeLoading(formCreateButton, false, buttonText)
     })
-}
-//добавление нового аватара
- function submitAvatarForm(evt){
-  const buttonText = buttonSaveAvatar.textContent;
-  changeLoading(buttonSaveAvatar, true, buttonText);
-  evt.preventDefault();
-  api.postNewAvatar()
-    .then((data) => {
-      profileAvatar.src = data.avatar;
-      closePopup(popupAvatar);
-      formAvatar.reset();
+  }
+})
 
-      // disableButton(buttonSaveAvatar)
+//добавление нового аватара
+const submitAvatarForm = new PopupWithForm ({
+  popupSelector: ".popup_theme_avatar",
+  handleFormSubmit: (inputValue) => {
+    submitAvatarForm.renderLoading(true);
+    api.postNewAvatar({ avatar: inputValue.avatarInput })
+    .then((data) => {
+      userInfo.setUserInfo({ avatar: data.avatar });
+      submitAvatarForm.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      changeLoading(buttonSaveAvatar, false, buttonText)
+      submitAvatarForm.renderLoading(false);
     })
-}
+  }
+})
+
 buttonEdit.addEventListener("click", () => {
   formInputName.value = profileTitle.textContent;
   formDescription.value = profileSubtitle.textContent;

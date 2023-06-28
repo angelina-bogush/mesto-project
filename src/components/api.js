@@ -42,25 +42,20 @@ loadProfileInfo(data){
   .then(this._checkAnswer);
 };
 //пост новой карточки
-postNewCard(){
+postNewCard(data){
   return fetch(`${this._url}/cards`, {
     method: "POST",
     headers: this._headers,
-    body: JSON.stringify({
-      name: cardNameInput.value,
-      link: cardLinkInput.value,
-    }),
+    body: JSON.stringify({data}),
   })
     .then(this._checkAnswer)
 };
 //новый аватар
-postNewAvatar(){
+postNewAvatar(data){
   return fetch(`${this._url}/users/me/avatar`, {
     method: "PATCH",
     headers: this._headers,
-    body: JSON.stringify({
-      avatar: avatarLinkInput.value,
-    }),
+    body: JSON.stringify({data}),
   })
   .then(this._checkAnswer);
 };
