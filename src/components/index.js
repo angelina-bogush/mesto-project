@@ -69,12 +69,15 @@ popupClosingIcon.forEach((icon) =>
 );
 
 //изменение имени в форме редактирования профиля
-function submitProfileForm(evt) {
-  evt.preventDefault();
-  const buttonText = formSubmitButton.textContent;
-  changeLoading(formSubmitButton, true, buttonText);
-  api.loadProfileInfo()
+// function submitProfileForm(evt) {
+//   evt.preventDefault();
+const changeUserInfo = new PopupWithForm({
+  popupSelector: ".popup_theme_edit",
+  handleFormSubmit: (inputValue) => {
+    changeUserInfo.renderLoading(true);
+  api.loadProfileInfo({ name: inputValue.formInputName, about: inputValue.formDescription })
     .then((profile) => {
+      //Продолжение от сюда 
       profileTitle.textContent = profile.name;
       profileSubtitle.textContent = profile.about;
       // changeLoading(formSubmitButton, true, loadingText, buttonText)
@@ -89,6 +92,9 @@ function submitProfileForm(evt) {
       changeLoading(formSubmitButton, false, buttonText)
     })
 }
+})
+
+
 //пост новой карточки на сервер
 function submitNewCardForm(evt) {
   evt.preventDefault();

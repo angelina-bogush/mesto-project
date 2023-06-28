@@ -33,14 +33,11 @@ getCardsInfo(){
     .then(this._checkAnswer)
 };
 //инфо о пользователе
-loadProfileInfo(){
+loadProfileInfo(data){
   return fetch(`${this._url}/users/me`, {
     method: "PATCH",
     headers: this._headers,
-    body: JSON.stringify({
-      name: formInputName.value,
-      about: formDescription.value,
-    }),
+    body: JSON.stringify({data}),
   })
   .then(this._checkAnswer);
 };
