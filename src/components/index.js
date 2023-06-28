@@ -26,7 +26,7 @@ import { Popup } from "./Popup"
 import  Api from "./Api.js";
 import { createCardFormSubmit } from "./card";
 import { disableButton } from "./FormValidator.js";
-import {config} from './data'
+import { config, profileInfo } from './data'
 import { FormValidator } from "./FormValidator.js"
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
@@ -36,6 +36,7 @@ const editProfileValidation = new FormValidator(validationConfig, formEdit);
 const editAvatarValidation = new FormValidator(validationConfig, formAvatar);
 const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config)
+const userInfo = new UserInfo(profileInfo);
 
 // enableValidation({
 //   formSelector: ".form",
@@ -47,11 +48,13 @@ const api = new Api(config)
 // });
 //инфо о пользователе и вывод карточек с сервера
 api.getInfo()
-.then(([userInfo, cards]) => {
-  profileTitle.textContent = userInfo.name;
-  profileSubtitle.textContent = userInfo.about;
-  profileAvatar.src = userInfo.avatar;
-  const myUserId = userInfo._id;
+.then(([userData, cards]) => {
+  // profileTitle.textContent = userInfo.name;
+  // profileSubtitle.textContent = userInfo.about;
+  // profileAvatar.src = userInfo.avatar;
+  // const myUserId = userInfo._id;
+  userInfo.setUserInfo(userData);
+  userId = userData._id;
   cards.forEach((card) => {
         const userId = card.owner._id;
         createCardFormSubmit(card, myUserId, userId)})

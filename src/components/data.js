@@ -5,3 +5,8 @@ export const config = {
     "Content-Type": "application/json",
   },
 };
+export const profileInfo = {
+  nameSelector: ".profile__title",
+  aboutSelector: ".profile__subtitle",
+  avatarSelector: ".profile__avatar",
+};
