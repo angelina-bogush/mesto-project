@@ -122,26 +122,41 @@ const submitAvatarForm = new PopupWithForm ({
   }
 })
 
-buttonEdit.addEventListener("click", () => {
-  formInputName.value = profileTitle.textContent;
-  formDescription.value = profileSubtitle.textContent;
-  openPopup(popupEditProfile, formSubmitButton);
+//Открытие попап редактирование профилья и валидация
+function handleProfileForm() {
+  const userObject = userInfo.getUserInfo();
+  formInputName.value = userObject.name;
+  formDescription.value = userObject.about;
   editProfileValidation.disableButton();
   editProfileValidation.hideError();
-});
+  changeUserInfo.open();
+}
 
+changeUserInfo.setEventListeners();
+buttonEdit.addEventListener("click", handleProfileForm);
 
-buttonAdd.addEventListener("click", () => {
-  openPopup(popupAddCard);
-  newPostValidation.hideError();
-  newPostValidation.disableButton();
-});
-
-buttonAvatar.addEventListener('click', () => {
-  openPopup(popupAvatar)
+//Открытие попап изменение аватара и валидация
+function handleAvatarForm() {
   editAvatarValidation.disableButton();
   editAvatarValidation.hideError();
-})
+  submitAvatarForm.open();
+}
+
+submitAvatarForm.setEventListeners();
+buttonAvatar.addEventListener("click", handleAvatarForm);
+
+//Открытие попап добавление карточки и валидация
+function handlePostForm() {
+  newPostValidation.hideError();
+  newPostValidation.disableButton();
+  submitNewCardForm.open()
+}
+
+submitNewCardForm.setEventListeners();
+buttonAdd.addEventListener("click", handlePostForm);
+
+
+
 
 // formEdit.addEventListener("submit", submitProfileForm);
 // formAdd.addEventListener("submit", submitNewCardForm);
