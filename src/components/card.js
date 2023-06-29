@@ -1,4 +1,4 @@
-import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from './variables.js';
+import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from '../utils/constants.js';
 import { Popup } from './Popup.js';
 import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo, Api} from './Api.js';
 import { FormValidator } from './FormValidator.js';

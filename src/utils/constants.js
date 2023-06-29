@@ -1,3 +1,26 @@
+export const validationConfig = {
+  formSelector: ".form",
+  formInput: ".form__input",
+  buttonSelector: ".form__button",
+  formErrorTheme: "form__input_theme_error",
+  formInputError: "form__input_error",
+  inactiveButtonClass: "form__button_inactive",
+};
+
+export const profileInfo = {
+  nameSelector: ".profile__title",
+  aboutSelector: ".profile__subtitle",
+  avatarSelector: ".profile__avatar",
+};
+
+export const config = {
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-25",
+  headers: {
+    authorization: "469baa30-a404-4c2f-8acf-7186e9d2571a",
+    "Content-Type": "application/json",
+  },
+};
+
 const page = document.querySelector('.page');
 const profile = page.querySelector('.profile');
 export const profileTitle = profile.querySelector(".profile__title");
@@ -31,11 +54,4 @@ export const buttonSaveEdit = page.querySelector('.form__button_submit');
 // export const buttonSaveNewCard = page.querySelector('.form__button_create');
 export const buttonSaveAvatar = page.querySelector('.form__button_avatar');
 
-export const validationConfig = {
-  formSelector: ".form",
-  formInput: ".form__input",
-  buttonSelector: ".form__button",
-  formErrorTheme: "form__input_theme_error",
-  formInputError: "form__input_error",
-  inactiveButtonClass: "form__button_inactive",
-};
+

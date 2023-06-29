@@ -5,7 +5,7 @@ import {
   avatarLinkInput,
   formDescription,
   cardNameInput,
-} from "./variables";
+} from "../utils/constants";
 
 export default class Api {
   constructor({baseUrl, headers}){

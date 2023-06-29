@@ -18,19 +18,20 @@ import {
   popupAvatar,
  formAvatar,
  profileAvatar,
- validationConfig
-} from "./variables";
-import { enableValidation } from "./FormValidator.js";
-import { changeLoading } from "./utils";
-import { Popup } from "./Popup"
-import  Api from "./Api.js";
-import { createCardFormSubmit } from "./card";
-import { disableButton } from "./FormValidator.js";
-import { config, profileInfo } from './data.js'
-import { FormValidator } from "./FormValidator.js"
-import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { UserInfo } from "./UserInfo.js"
+ validationConfig,
+ profileInfo,
+ config
+} from "../utils/constants.js";
+import { enableValidation } from "../components/FormValidator.js";
+import { changeLoading } from "../utils/utils.js";
+import { Popup } from "../components/Popup.js"
+import  Api from "../components/Api.js";
+import { createCardFormSubmit } from "../components/card.js";
+import { disableButton } from "../components/FormValidator.js";
+import { FormValidator } from "../components/FormValidator.js"
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js"
 
 let userId;
 let cardList;
@@ -122,6 +123,7 @@ const submitAvatarForm = new PopupWithForm ({
   }
 })
 
+
 //Открытие попап редактирование профилья и валидация
 function handleProfileForm() {
   const userObject = userInfo.getUserInfo();
@@ -154,9 +156,6 @@ function handlePostForm() {
 
 submitNewCardForm.setEventListeners();
 buttonAdd.addEventListener("click", handlePostForm);
-
-
-
 
 // formEdit.addEventListener("submit", submitProfileForm);
 // formAdd.addEventListener("submit", submitNewCardForm);
