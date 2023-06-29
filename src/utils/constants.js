@@ -39,7 +39,7 @@ export const formAvatar = page.querySelector('.form_avatar');
 export const cardNameInput = page.querySelector('.form__input_theme_name-card');
 export const cardLinkInput =  formAdd.querySelector('.form__input_theme_link');
 export const avatarLinkInput = page.querySelector('.form__input_theme_avatar');
-export const popupPhoto = page.querySelector('.popup_theme_photo');
+export const popupPhoto = document.querySelector('.popup_theme_photo');
 export const popupClosingIcon = page.querySelectorAll('.popup__close-icon');
 export const popupPhotoImage = popupPhoto.querySelector('.popup__image');
 export const popupPhotoDescription = popupPhoto.querySelector('.popup__description');
@@ -53,5 +53,5 @@ export const profileAvatar = page.querySelector('.profile__avatar');
 export const buttonSaveEdit = page.querySelector('.form__button_submit');
 // export const buttonSaveNewCard = page.querySelector('.form__button_create');
 export const buttonSaveAvatar = page.querySelector('.form__button_avatar');
-
+export const cardsContainer = ".cards"
 

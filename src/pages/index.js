@@ -20,7 +20,9 @@ import {
  profileAvatar,
  validationConfig,
  profileInfo,
- config
+ config,
+ popupPhoto,
+ cardsContainer
 } from "../utils/constants.js";
 import { enableValidation } from "../components/FormValidator.js";
 import { changeLoading } from "../utils/utils.js";
@@ -31,7 +33,9 @@ import { disableButton } from "../components/FormValidator.js";
 import { FormValidator } from "../components/FormValidator.js"
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
-import { UserInfo } from "../components/UserInfo.js"
+import { UserInfo } from "../components/UserInfo";
+import  { Section } from "../components/section.js";
+import { Card } from "../components/card.js"
 
 let userId;
 let cardList;
@@ -41,6 +45,54 @@ const editAvatarValidation = new FormValidator(validationConfig, formAvatar);
 const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config)
 const userInfo = new UserInfo(profileInfo);
+// const popupWithImage = new PopupWithImage(popupPhoto);
+console.log(popupPhoto)
+const createCard = (item) => {
+  const card = new Card({
+    title: item.name,
+    link: item.link,
+    ownerId: item.owner._id,
+    cardId: item._id,
+    userId: userId,
+    likes: item.likes,
+    cardSelector: "#template-card",
+    handleAddLikeClick: () => {
+      api
+        .addLikeCard(item._id)
+        .then((data) => {
+          card.setLike();
+          card.showLikeCount(data.likes.length);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    handleRemoveLikeClick: () => {
+      api
+        .deleteLikeCard(item._id)
+        .then((data) => {
+          card.setLike();
+          card.showLikeCount(data.likes.length);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    handleDeleteClick: () => {
+      api
+        .deleteCardOnServer(item._id)
+        .then((dataFromServer) => {
+          card.clickButtonDelete();
+          console.log(dataFromServer.message);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    handleCardClick: () => popupWithImage.open(item.link, item.name),
+   } );
+   return card;
+}
 
 //инфо о пользователе и вывод карточек с сервера
 api.getInfo()
@@ -51,13 +103,22 @@ api.getInfo()
   // const myUserId = userInfo._id;
   userInfo.setUserInfo(userData);
   userId = userData._id;
-  cards.forEach((card) => {
-        const userId = card.owner._id;
-        createCardFormSubmit(card, myUserId, userId)})
-})
-.catch((err) => {
-  console.log(err)
-})
+
+ cardList = new Section({items: cards,
+  renderer: (item) => {
+    const card = createCard(item);
+    const cardElement = card.generate();
+    cardList.addItem(cardElement);
+  },
+}, cardsContainer);
+cardList.renderItems()})
+//   cards.forEach((card) => {
+//         const userId = card.owner._id;
+//         createCardFormSubmit(card, myUserId, userId)})
+// })
+// .catch((err) => {
+//   console.log(err)
+// })
 
 // закрытие всех попапов на крестик
 // popupClosingIcon.forEach((icon) =>
@@ -93,7 +154,7 @@ const submitNewCardForm = new PopupWithForm ({
   submitNewCardForm.renderLoading(true);
   api.postNewCard({ name: inputValue.cardNameInput, link: inputValue.cardLinkInput })
     .then((data) => {
-      //НАДО ДОБИТЬ ТУТ!!!!!
+      const card = createCard(data) // Добить тут!!!
     })
     .catch((err) => {
       console.log(err);
