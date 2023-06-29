@@ -26,11 +26,14 @@ import { Popup } from "./Popup"
 import  Api from "./Api.js";
 import { createCardFormSubmit } from "./card";
 import { disableButton } from "./FormValidator.js";
-import { config, profileInfo } from './data'
+import { config, profileInfo } from './data.js'
 import { FormValidator } from "./FormValidator.js"
-import { PopupWithForm } from "../components/PopupWithForm.js";
-import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupWithImage } from "./PopupWithImage.js";
+import { UserInfo } from "./UserInfo.js"
 
+let userId;
+let cardList;
 
 const editProfileValidation = new FormValidator(validationConfig, formEdit);
 const editAvatarValidation = new FormValidator(validationConfig, formAvatar);
@@ -83,7 +86,7 @@ const changeUserInfo = new PopupWithForm({
 })
 
 //пост новой карточки на сервер
-const submitNewCardForm = new PopupWithForm() ({
+const submitNewCardForm = new PopupWithForm ({
   popupSelector: ".popup_theme_add-card",
   handleFormSubmit: (inputValue) => {
   submitNewCardForm.renderLoading(true);
