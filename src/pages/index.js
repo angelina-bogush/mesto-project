@@ -45,8 +45,8 @@ const editAvatarValidation = new FormValidator(validationConfig, formAvatar);
 const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config)
 const userInfo = new UserInfo(profileInfo);
-// const popupWithImage = new PopupWithImage(popupPhoto);
-console.log(popupPhoto)
+const popupWithImage = new PopupWithImage('.popup_theme_photo');
+console.log(popupWithImage)
 const createCard = (item) => {
   const card = new Card({
     title: item.name,
@@ -109,7 +109,7 @@ api.getInfo()
     const card = createCard(item);
     const cardElement = card.generate();
     cardList.addItem(cardElement);
-  },
+  }
 }, cardsContainer);
 cardList.renderItems()})
 //   cards.forEach((card) => {
