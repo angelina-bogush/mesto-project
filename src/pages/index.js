@@ -154,13 +154,16 @@ const submitNewCardForm = new PopupWithForm ({
   submitNewCardForm.renderLoading(true);
   api.postNewCard({ name: inputValue.cardNameInput, link: inputValue.cardLinkInput })
     .then((data) => {
-      const card = createCard(data) // Добить тут!!!
+      const card = createCard(data);
+      const cardElement = card.generate();
+      cardList.addItem(cardElement);
+      submitNewCardForm.close()
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      changeLoading(formCreateButton, false, buttonText)
+      submitNewCardForm.renderLoading(false);
     })
   }
 })
