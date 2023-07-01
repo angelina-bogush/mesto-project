@@ -8,8 +8,6 @@ import {
   buttonAdd,
   popupAddCard,
   popupClosingIcon,
-  profileSubtitle,
-  profileTitle,
   formEdit,
   formSubmitButton,
   formCreateButton,
@@ -46,7 +44,6 @@ const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config)
 const userInfo = new UserInfo(profileInfo);
 const popupWithImage = new PopupWithImage('.popup_theme_photo');
-console.log(popupWithImage)
 const createCard = (item) => {
   const card = new Card({
     title: item.name,
