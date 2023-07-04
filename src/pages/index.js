@@ -23,6 +23,9 @@ import {
   cardsContainer,
   popupPhotoSelector
 } from "../utils/constants.js";
+
+//У нас проблемы с конфликтами!!!!
+
 import { Api } from "../components/api.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
