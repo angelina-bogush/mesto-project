@@ -26,7 +26,7 @@ export class Api {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({data}),
+      body: JSON.stringify(data),
     }).then(this._checkAnswer);
   }
   //пост новой карточки
@@ -34,7 +34,7 @@ export class Api {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify({data}),
+      body: JSON.stringify(data),
     }).then(this._checkAnswer);
   }
   //новый аватар
@@ -42,7 +42,7 @@ export class Api {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({data}),
+      body: JSON.stringify(data),
     }).then(this._checkAnswer);
   }
   //удаление карточки

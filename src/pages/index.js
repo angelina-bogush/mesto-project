@@ -140,8 +140,8 @@ const submitNewCardForm = new PopupWithForm({
     submitNewCardForm.renderLoading(true);
     api
       .postNewCard({
-        name: inputValue.cardNameInput,
-        link: inputValue.cardLinkInput,
+        name: inputValue.name,
+        link: inputValue.description,
       })
       .then((data) => {
         const card = createCard(data);
