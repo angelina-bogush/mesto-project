@@ -1,9 +1,3 @@
-import {popupPhotoImage, popupPhotoDescription, cardContainer, formAdd, cardTemplate, popupPhoto, popupAddCard, formCreateButton} from '../utils/constants.js';
-import { Popup } from './Popup.js';
-import { deleteCardOnServer, addLikeCard, deleteLikeCard, getUserInfo, Api} from './Api.js';
-import { FormValidator } from './FormValidator.js';
-
-
 export class Card {
   constructor({
     title,
@@ -16,8 +10,8 @@ export class Card {
     handleAddLikeClick,
     handleRemoveLikeClick,
     handleDeleteClick,
-    handleCardClick
-  }){
+    handleCardClick,
+  }) {
     this._title = title;
     this._link = link;
     this._ownerId = ownerId;
@@ -30,68 +24,72 @@ export class Card {
     this._handleDeleteClick = handleDeleteClick;
     this._handleCardClick = handleCardClick;
     this.clickButtonDelete = this.clickButtonDelete.bind(this);
-
   }
-_getElement(){
-  const cardElement = document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
+  _getElement() {
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
 
     return cardElement;
-}
-
-_showDeleteButton() {
-  if (this._ownerId !== this._userId) {
-    this._element.querySelector(".card__trash").remove();
   }
-}
-setLike() {
-  this._like.classList.toggle("card__like_active");
-}
-_handleLike() {
-  if (!this._like.classList.contains("card__like_active")) {
-    this._handleAddLikeClick();
-  } else {
-    this._handleRemoveLikeClick();
+
+  _showDeleteButton() {
+    if (this._ownerId !== this._userId) {
+      this._element.querySelector(".card__trash").remove();
+    }
   }
-}
-showLikeCount(arrayLikes) {
-  this._likeCounter.textContent = arrayLikes;
-}
-_showMyLike() {
-  if (this._likes.find((item) => this._userId === item._id)) {
-    this._like.classList.add("card__like_active");
+  setLike() {
+    this._like.classList.toggle("card__like_active");
   }
-}
-generate() {
-  this._element = this._getElement();
-  this._like = this._element.querySelector(".card__like");
-  this._likeCounter = this._element.querySelector(".card__like-count");
-  this._cardImage = this._element.querySelector(".card__image");
+  _handleLike() {
+    if (!this._like.classList.contains("card__like_active")) {
+      this._handleAddLikeClick();
+    } else {
+      this._handleRemoveLikeClick();
+    }
+  }
+  showLikeCount(arrayLikes) {
+    this._likeCounter.textContent = arrayLikes;
+  }
+  _showMyLike() {
+    if (this._likes.find((item) => this._userId === item._id)) {
+      this._like.classList.add("card__like_active");
+    }
+  }
+  generate() {
+    this._element = this._getElement();
+    this._like = this._element.querySelector(".card__like");
+    this._likeCounter = this._element.querySelector(".card__like-count");
+    this._cardImage = this._element.querySelector(".card__image");
 
-  this._setEventListeners();
-  this._showDeleteButton();
-  this.showLikeCount(this._likes.length);
-  this._showMyLike();
+    this._setEventListeners();
+    this._showDeleteButton();
+    this.showLikeCount(this._likes.length);
+    this._showMyLike();
 
-  this._cardImage.src = this._link;
-//название карточки
-  this._element.querySelector(".card__title").textContent = this._title;
-  this._cardImage.alt = this._title;
+    this._cardImage.src = this._link;
+    //название карточки
+    this._element.querySelector(".card__title").textContent = this._title;
+    this._cardImage.alt = this._title;
 
-  return this._element;
-}
-clickButtonDelete() {
-  this._element.remove();
-}
-_setEventListeners() {
-  this._cardImage.addEventListener("click", this._handleCardClick);
+    return this._element;
+  }
+  clickButtonDelete() {
+    this._element.remove();
+  }
+  _setEventListeners() {
+    this._cardImage.addEventListener("click", this._handleCardClick);
 
-  this._like.addEventListener("click", () => {
-    this._handleLike();
-  });
-  this._element.querySelector(".card__trash").addEventListener("click", () => {
-    this._handleDeleteClick();
-  });
-}
+    this._like.addEventListener("click", () => {
+      this._handleLike();
+    });
+    this._element
+      .querySelector(".card__trash")
+      .addEventListener("click", () => {
+        this._handleDeleteClick();
+      });
+  }
 }
 // function addClassLike(event, cardId, Api) {
 //   Api.addLikeCard(cardId)
@@ -121,18 +119,18 @@ _setEventListeners() {
 //     Api.deleteCardOnServer(cardId)
 //     .then(() => {
 //     event.target.closest('.card').remove();
-//     })  
+//     })
 //     .catch((err) => {
 //       console.log(err)
-//     })                         
+//     })
 //   }
 
 // const createCard = function (newCardObj, card, myUserId, userId) {
-//     const newCard = cardTemplate.querySelector(".card").cloneNode(true); 
-//     const newCardName = newCard.querySelector(".card__title"); 
-//     const newCardImage = newCard.querySelector(".card__image"); 
-//     newCardName.textContent = newCardObj['name']; 
-//     newCardImage.src = newCardObj['link']; 
+//     const newCard = cardTemplate.querySelector(".card").cloneNode(true);
+//     const newCardName = newCard.querySelector(".card__title");
+//     const newCardImage = newCard.querySelector(".card__image");
+//     newCardName.textContent = newCardObj['name'];
+//     newCardImage.src = newCardObj['link'];
 //     newCardImage.alt = newCardObj['name'];
 //     const cardLike = newCard.querySelector(".card__like");
 //     const cardImage = newCard.querySelector(".card__image");
@@ -143,7 +141,7 @@ _setEventListeners() {
 //       buttonTrash.style.display = 'none'
 //     } else {
 //       buttonTrash.setAttribute('card-id', card._id); // добавила атрибут id карточки
-//     } 
+//     }
 //     cardLike.setAttribute('cardLike-id', card._id);
 //   //   const clickCard = function(){                // открытие попапа картинки
 //   //   popupPhotoImage.src = newCardObj['link'];
@@ -177,6 +175,5 @@ _setEventListeners() {
 //   addCard(newCardObj, card, myUserId, userId);
 //   closePopup(popupAddCard);
 //   formAdd.reset();
-  
-  
-  // disableButton(formCreateButton)
+
+// disableButton(formCreateButton)
