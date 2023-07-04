@@ -21,6 +21,7 @@ import {
   config,
   popupPhoto,
   cardsContainer,
+  popupPhotoSelector
 } from "../utils/constants.js";
 import { Api } from "../components/Api.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -38,7 +39,7 @@ const editAvatarValidation = new FormValidator(validationConfig, formAvatar);
 const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config);
 const userInfo = new UserInfo(profileInfo);
-const popupWithImage = new PopupWithImage(".popup_theme_photo");
+const popupWithImage = new PopupWithImage(popupPhotoSelector);
 
 const createCard = (item) => {
   const card = new Card({
@@ -117,8 +118,8 @@ const changeUserInfo = new PopupWithForm({
     changeUserInfo.renderLoading(true);
     api
       .loadProfileInfo({
-        name: inputValue.formInputName,
-        about: inputValue.formDescription,
+        name: inputValue.name,
+        about: inputValue.aboutUser,
       })
       .then((profile) => {
         userInfo.setUserInfo({ name: profile.name, about: profile.about });
@@ -140,8 +141,8 @@ const submitNewCardForm = new PopupWithForm({
     submitNewCardForm.renderLoading(true);
     api
       .postNewCard({
-        name: inputValue.cardNameInput,
-        link: inputValue.cardLinkInput,
+        name: inputValue.place,
+        link: inputValue.placeLink
       })
       .then((data) => {
         const card = createCard(data);
@@ -165,7 +166,7 @@ const submitAvatarForm = new PopupWithForm({
   handleFormSubmit: (inputValue) => {
     submitAvatarForm.renderLoading(true);
     api
-      .postNewAvatar({ avatar: inputValue.avatarInput })
+      .postNewAvatar({ avatar: inputValue.avatar })
       .then((data) => {
         userInfo.setUserInfo({ avatar: data.avatar });
         submitAvatarForm.close();
