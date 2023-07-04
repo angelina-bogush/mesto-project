@@ -23,7 +23,7 @@ import {
   cardsContainer,
   popupPhotoSelector
 } from "../utils/constants.js";
-import { Api } from "../components/Api.js";
+import { Api } from "../components/api.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
