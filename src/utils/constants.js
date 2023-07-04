@@ -55,5 +55,7 @@ export const buttonAvatar = page.querySelector(".profile__overlay");
 export const profileAvatar = page.querySelector(".profile__avatar");
 export const buttonSaveEdit = page.querySelector(".form__button_submit");
 // export const buttonSaveNewCard = page.querySelector('.form__button_create');
-export const buttonSaveAvatar = page.querySelector(".form__button_avatar");
+export const buttonSaveAvatar = page.querySelector('.form__button_avatar');
 export const cardsContainer = ".cards";
+export const popupPhotoSelector = '.popup_theme_photo'
+
