@@ -46,7 +46,7 @@ postNewCard(data){
   return fetch(`${this._url}/cards`, {
     method: "POST",
     headers: this._headers,
-    body: JSON.stringify({data}),
+    body: JSON.stringify(data),
   })
     .then(this._checkAnswer)
 };

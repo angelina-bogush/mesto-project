@@ -19,8 +19,8 @@ import {
  validationConfig,
  profileInfo,
  config,
- popupPhoto,
- cardsContainer
+ cardsContainer,
+ popupPhotoSelector
 } from "../utils/constants.js";
 import { enableValidation } from "../components/FormValidator.js";
 import { changeLoading } from "../utils/utils.js";
@@ -43,7 +43,7 @@ const editAvatarValidation = new FormValidator(validationConfig, formAvatar);
 const newPostValidation = new FormValidator(validationConfig, formAdd);
 const api = new Api(config)
 const userInfo = new UserInfo(profileInfo);
-const popupWithImage = new PopupWithImage('.popup_theme_photo');
+const popupWithImage = new PopupWithImage(popupPhotoSelector);
 const createCard = (item) => {
   const card = new Card({
     title: item.name,
@@ -149,7 +149,7 @@ const submitNewCardForm = new PopupWithForm ({
   popupSelector: ".popup_theme_add-card",
   handleFormSubmit: (inputValue) => {
   submitNewCardForm.renderLoading(true);
-  api.postNewCard({ name: inputValue.cardNameInput, link: inputValue.cardLinkInput })
+  api.postNewCard({ name: inputValue.name, link: inputValue.description })
     .then((data) => {
       const card = createCard(data);
       const cardElement = card.generate();
