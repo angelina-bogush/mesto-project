@@ -4,27 +4,16 @@ import {
   buttonEdit,
   formInputName,
   formDescription,
-  popupEditProfile,
   buttonAdd,
-  popupAddCard,
-  popupClosingIcon,
   formEdit,
-  formSubmitButton,
-  formCreateButton,
-  buttonSaveAvatar,
   buttonAvatar,
-  popupAvatar,
   formAvatar,
-  profileAvatar,
   validationConfig,
   profileInfo,
   config,
-  popupPhoto,
   cardsContainer,
-  popupPhotoSelector
+  popupPhotoSelector,
 } from "../utils/constants.js";
-
-//У нас проблемы с конфликтами!!!!
 
 import { Api } from "../components/api.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -44,6 +33,7 @@ const api = new Api(config);
 const userInfo = new UserInfo(profileInfo);
 const popupWithImage = new PopupWithImage(popupPhotoSelector);
 
+//Добавление карточки, лайки и удаление 
 const createCard = (item) => {
   const card = new Card({
     title: item.name,
@@ -61,7 +51,7 @@ const createCard = (item) => {
           card.showLikeCount(data.likes.length);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(`Что-то пошло так! Ошибка при добавления лайки: ${err}`);
         });
     },
     handleRemoveLikeClick: () => {
@@ -72,7 +62,7 @@ const createCard = (item) => {
           card.showLikeCount(data.likes.length);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(`Что-то пошло так! Ошибка при удаления лайки: ${err}`);
         });
     },
     handleDeleteClick: () => {
@@ -83,7 +73,7 @@ const createCard = (item) => {
           console.log(dataFromServer.message);
         })
         .catch((err) => {
-          console.log(err);
+          сonsole.log(`Что-то пошло так! Ошибка при удаление карточки: ${err}`);
         });
     },
     handleCardClick: () => popupWithImage.open(item.link, item.name),
@@ -93,10 +83,6 @@ const createCard = (item) => {
 
 //инфо о пользователе и вывод карточек с сервера
 api.getInfo().then(([userData, cards]) => {
-  // profileTitle.textContent = userInfo.name;
-  // profileSubtitle.textContent = userInfo.about;
-  // profileAvatar.src = userInfo.avatar;
-  // const myUserId = userInfo._id;
   userInfo.setUserInfo(userData);
   userId = userData._id;
 
@@ -129,7 +115,9 @@ const changeUserInfo = new PopupWithForm({
         changeUserInfo.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(
+          `Что-то пошло так! Ошибка при редактирования профиля: ${err}`
+        );
       })
       .finally(() => {
         changeUserInfo.renderLoading(false);
@@ -155,7 +143,9 @@ const submitNewCardForm = new PopupWithForm({
         submitNewCardForm.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(
+          `Что-то пошло так! Ошибка при добавления новой карточки: ${err}`
+        );
       })
       .finally(() => {
         submitNewCardForm.renderLoading(false);
@@ -175,7 +165,9 @@ const submitAvatarForm = new PopupWithForm({
         submitAvatarForm.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(
+          `Что-то пошло так! Ошибка при добавления нового аватара: ${err}`
+        );
       })
       .finally(() => {
         submitAvatarForm.renderLoading(false);
@@ -219,10 +211,7 @@ buttonAdd.addEventListener("click", handlePostForm);
 //закрытие попапа с картинкой на крестик
 popupWithImage.setEventListeners();
 
-// formEdit.addEventListener("submit", submitProfileForm);
-// formAdd.addEventListener("submit", submitNewCardForm);
-// formAvatar.addEventListener('submit', submitAvatarForm);
-
+//Валидация форм
 newPostValidation.enableValidation();
 editAvatarValidation.enableValidation();
 editProfileValidation.enableValidation();
