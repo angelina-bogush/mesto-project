@@ -2,7 +2,7 @@ export class Popup {
   constructor(popupSelector) {
     this._popupName = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._closePopupOverlay = this._handleClickOverlay.bind(this);
+    this._handleClickOverlay = this._handleClickOverlay.bind(this);
   }
 
   open() {

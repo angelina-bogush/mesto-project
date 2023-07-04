@@ -216,6 +216,9 @@ function handlePostForm() {
 submitNewCardForm.setEventListeners();
 buttonAdd.addEventListener("click", handlePostForm);
 
+//закрытие попапа с картинкой на крестик
+popupWithImage.setEventListeners();
+
 // formEdit.addEventListener("submit", submitProfileForm);
 // formAdd.addEventListener("submit", submitNewCardForm);
 // formAvatar.addEventListener('submit', submitAvatarForm);
