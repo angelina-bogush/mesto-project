@@ -30,13 +30,13 @@ export const buttonAdd = profile.querySelector(".profile__add-button");
 export const popups = page.querySelectorAll(".popup");
 export const popupEditProfile = page.querySelector(".popup_theme_edit");
 export const popupAddCard = page.querySelector(".popup_theme_add-card");
-export const formEdit = page.querySelector(".form_edit");
+export const formEdit = document.forms["editProfile"];
 export const formInputName = formEdit.querySelector(".form__input_theme_name");
 export const formDescription = formEdit.querySelector(
   ".form__input_theme_description"
 );
-export const formAdd = page.querySelector(".form_add-card");
-export const formAvatar = page.querySelector(".form_avatar");
+export const formAdd = document.forms["addCard"];
+export const formAvatar = document.forms["editAvatar"];
 export const cardNameInput = page.querySelector(".form__input_theme_name-card");
 export const cardLinkInput = formAdd.querySelector(".form__input_theme_link");
 export const avatarLinkInput = page.querySelector(".form__input_theme_avatar");

@@ -15,7 +15,7 @@ import {
   popupPhotoSelector,
 } from "../utils/constants.js";
 
-import { Api } from "../components/api.js";
+import { Api } from "../components/Api.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
@@ -98,6 +98,11 @@ api.getInfo().then(([userData, cards]) => {
     cardsContainer
   );
   cardList.renderItems();
+})
+.catch((err) => {
+  console.log(
+    `Что-то пошло так! Ошибка при загрузке данных: ${err}`
+  );
 });
 
 //изменение имени в форме редактирования профиля
