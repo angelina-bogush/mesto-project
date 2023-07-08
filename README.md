@@ -19,3 +19,8 @@
  * Сборка проекта с помощью WebPack
 
 [Ссылка на Git Pages](https://angelina-bogush.github.io/mesto-project/)
+
+моя почта -  angelinabogush@yandex.ru
+почта и репозиторий напарника -
+https://github.com/MrKuchkarov
+yekut1515@yandex.ru
